@@ -37,9 +37,9 @@ public class MemberRepository {
 	/**
 	 * 멤버 로그인 ID로 조회
 	 */
-	public List<Member> findByLoginID(String loginID) {
-		return em.createQuery("select m from Member m where m.login_id = :login_id", Member.class)
-			.setParameter("login_id", loginID)
+	public List<Member> findByLoginID(String loginId) {
+		return em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
+			.setParameter("loginId", loginId)
 			.getResultList();
 	}
 
@@ -50,5 +50,13 @@ public class MemberRepository {
 	public void addPlaylist(Member member, Playlist playlist) {
 		List<Playlist> playlistList = member.getPlaylistList();
 		playlistList.add(playlist);
+	}
+
+	/**
+	 * 회원 목록 조회
+	 */
+	public List<Member> findAll() {
+		return em.createQuery("select m from Member m", Member.class)
+			.getResultList();
 	}
 }

@@ -19,15 +19,21 @@ public class MemberService {
 	 */
 	public Long register(Member member) {
 		validateMember(member);
-		memberRepository.save(member);
-		return member.getId();
+		return memberRepository.save(member);
 	}
 
 	//중복회원 검증
 	private void validateMember(Member member) {
-		List<Member> findMember = memberRepository.findByLoginID(member.getLogin_id());
+		List<Member> findMember = memberRepository.findByLoginID(member.getLoginId());
 		if (!findMember.isEmpty()) {
 			throw new IllegalArgumentException("이미 존재하는 회원입니다.");
 		}
+	}
+
+	/**
+	 * 회원 목록 조회
+	 */
+	public List<Member> findMemberList(){
+		return memberRepository.findAll();
 	}
 }

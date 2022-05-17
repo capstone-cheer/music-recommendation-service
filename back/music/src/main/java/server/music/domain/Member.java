@@ -26,7 +26,7 @@ public class Member {
 	private Long id;
 
 	@Column(unique = true, nullable = false, updatable = false)
-	private String login_id;
+	private String loginId;
 	@Column(nullable = false)
 	private String password;
 
