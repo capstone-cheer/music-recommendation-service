@@ -23,7 +23,7 @@ class MemberServiceTest {
 	public void 회원가입() throws Exception {
 		//given
 		Member member = new Member();
-		member.setLogin_id("id");
+		member.setLoginId("id");
 		member.setPassword("password");
 
 		//when
@@ -31,7 +31,7 @@ class MemberServiceTest {
 
 		//then
 		Member one = memberRepository.findOne(registerId);
-		assertThat(member.getId()).isEqualTo(one.getId());
+		assertThat(member).isEqualTo(one);
 	}
 
 	@Test
@@ -39,9 +39,9 @@ class MemberServiceTest {
 		//given
 		Member member1 = new Member();
 		Member member2 = new Member();
-		member1.setLogin_id("sameId");
+		member1.setLoginId("sameId");
 		member1.setPassword("password");
-		member2.setLogin_id("sameId");
+		member2.setLoginId("sameId");
 		member2.setPassword("password");
 
 		//when
