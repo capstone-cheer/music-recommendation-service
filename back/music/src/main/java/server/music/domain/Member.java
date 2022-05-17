@@ -11,9 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.lang.Nullable;
+
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 public class Member {
 	@Id
@@ -27,5 +31,6 @@ public class Member {
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	@Nullable
 	private List<Playlist> playlistList = new ArrayList<>();
 }

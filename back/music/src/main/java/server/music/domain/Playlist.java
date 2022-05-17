@@ -23,6 +23,8 @@ public class Playlist {
 	@Column(name = "playlist_id")
 	private Long id;
 
+	private String name; //사용자가 지정한 플레이리스트 이름
+
 	@ManyToOne
 	@JoinColumn(name = "member_id")
 	private Member member;
