@@ -16,11 +16,11 @@ import lombok.Getter;
 @Table(name = "song")
 public class Song {
 	@Id
-	@GeneratedValue
 	@Column(name = "song_id")
-	private Long id;
+	private String songCode; //spotify 음원 고유 식별 문자열
 
-	private String title;
+	private String title; //노래 제목
+	private String imageUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artist_id")
