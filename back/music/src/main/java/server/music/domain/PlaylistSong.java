@@ -32,7 +32,7 @@ public class PlaylistSong {
 	private Song song;
 
 	//==생성 메서드==//
-	public static PlaylistSong createPlaylistSong(Playlist playlist, Song song){
+	public static PlaylistSong createPlaylistSong(Playlist playlist, Song song) {
 		PlaylistSong playlistSong = new PlaylistSong();
 		playlistSong.setPlaylist(playlist);
 		playlistSong.setSong(song);

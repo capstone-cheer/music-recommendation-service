@@ -40,6 +40,17 @@ public class Playlist {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist", cascade = CascadeType.ALL)
 	private List<PlaylistSong> playlistSongs = new ArrayList<>();
 
+	//==생성 메서드==//
+	public static Playlist createPlaylist(String name, Member member, @Nullable PlaylistSong... playlistSongs) {
+		Playlist playlist = new Playlist();
+		playlist.setName(name);
+		playlist.setMember(member);
+		for (PlaylistSong playlistSong : Objects.requireNonNull(playlistSongs)) {
+			playlist.addPlaylistSong(playlistSong);
+		}
+		return playlist;
+	}
+
 	//==연관관계 메서드==//
 	public void setMember(Member member) {
 		this.member = member;
@@ -53,16 +64,5 @@ public class Playlist {
 	public void addPlaylistSong(PlaylistSong playlistSong) {
 		playlistSongs.add(playlistSong);
 		playlistSong.setPlaylist(this);
-	}
-
-	//==생성 메서드==//
-	public static Playlist createPlaylist(String name, Member member, @Nullable  PlaylistSong... playlistSongs) {
-		Playlist playlist = new Playlist();
-		playlist.setName(name);
-		playlist.setMember(member);
-		for (PlaylistSong playlistSong : Objects.requireNonNull(playlistSongs)) {
-			playlist.addPlaylistSong(playlistSong);
-		}
-		return playlist;
 	}
 }

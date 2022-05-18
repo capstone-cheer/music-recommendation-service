@@ -57,7 +57,7 @@ class MemberServiceTest {
 
 	@Test
 	public void 회원목록조회() throws Exception {
-	    //given
+		//given
 		Member member1 = new Member();
 		Member member2 = new Member();
 		Member member3 = new Member();
@@ -72,7 +72,7 @@ class MemberServiceTest {
 		memberService.register(member2);
 		memberService.register(member3);
 
-	    //when
+		//when
 		List<Member> memberList = memberService.findMemberList();
 
 		//then
