@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import server.music.controller.PlaylistForm;
 import server.music.domain.Member;
 import server.music.domain.Playlist;
 import server.music.domain.PlaylistSong;
@@ -16,7 +15,6 @@ import server.music.repository.PlaylistRepository;
 import server.music.repository.SongRepository;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PlaylistService {
 
@@ -27,10 +25,8 @@ public class PlaylistService {
 	/**
 	 * 플레이리스트 생성
 	 */
-	public Long createPlaylist(Long memberId, PlaylistForm playlistForm) {
-		Member member = memberRepository.findOne(memberId);
-		String name = playlistForm.getName();
-		Playlist playlist = Playlist.createPlaylist(name, member);
+	public Long createPlaylist(Member member, String playlistName) {
+		Playlist playlist = Playlist.createPlaylist(playlistName, member);
 		return playlistRepository.save(playlist);
 	}
 
