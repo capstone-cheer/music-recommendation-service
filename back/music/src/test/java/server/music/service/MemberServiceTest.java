@@ -2,6 +2,8 @@ package server.music.service;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,29 @@ class MemberServiceTest {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			memberService.register(member2);
 		});
+	}
+
+	@Test
+	public void 회원목록조회() throws Exception {
+		//given
+		Member member1 = new Member();
+		Member member2 = new Member();
+		Member member3 = new Member();
+		member1.setLoginId("id1");
+		member1.setPassword("password");
+		member2.setLoginId("id2");
+		member2.setPassword("password");
+		member3.setLoginId("id3");
+		member3.setPassword("password");
+
+		memberService.register(member1);
+		memberService.register(member2);
+		memberService.register(member3);
+
+		//when
+		List<Member> memberList = memberService.findMemberList();
+
+		//then
+		assertThat(memberList).containsExactly(member1, member2, member3);
 	}
 }
