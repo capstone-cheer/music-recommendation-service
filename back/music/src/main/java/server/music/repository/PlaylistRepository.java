@@ -48,7 +48,7 @@ public class PlaylistRepository {
 	 */
 	public List<Playlist> findAllUserPlaylist(Member member) {
 		return em.createQuery("select p from Playlist p where p.member = :member", Playlist.class)
-			.setParameter("member", member.getId())
+			.setParameter("member", member)
 			.getResultList();
 	}
 }
