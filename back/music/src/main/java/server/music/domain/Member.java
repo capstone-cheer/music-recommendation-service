@@ -30,7 +30,6 @@ public class Member {
 	@Column(nullable = false)
 	private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-	@Nullable
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
 	private List<Playlist> playlistList = new ArrayList<>();
 }

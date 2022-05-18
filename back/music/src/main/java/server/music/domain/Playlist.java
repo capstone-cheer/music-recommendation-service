@@ -33,18 +33,17 @@ public class Playlist {
 	private String name; //사용자가 지정한 플레이리스트 이름
 	private String imageUrl = Default.THUMBNAIL; // 플레이리스트 대표 이미지 (가장 첫 음악의 앨범커버)
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist", cascade = CascadeType.ALL)
-	@Nullable //노래가 하나도 없어도 가능
 	private List<PlaylistSong> playlistSongs = new ArrayList<>();
 
 	//==연관관계 메서드==//
 	public void setMember(Member member) {
 		this.member = member;
-		Objects.requireNonNull(member.getPlaylistList()).add(this);
+		member.getPlaylistList().add(this);
 	}
 
 	public void setName(String name) {
@@ -52,7 +51,7 @@ public class Playlist {
 	}
 
 	public void addPlaylistSong(PlaylistSong playlistSong) {
-		Objects.requireNonNull(playlistSongs).add(playlistSong);
+		playlistSongs.add(playlistSong);
 		playlistSong.setPlaylist(this);
 	}
 
