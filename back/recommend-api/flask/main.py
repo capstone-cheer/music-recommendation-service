@@ -1,6 +1,6 @@
 from flask import Flask, request
 import json
-import recommendation.modelManager as modelManager
+import recommendation.recommendManager as recommendManager
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/recommend/playlist')
 def get_recommend_by_playlist():
     data = request.get_json()
-    result = model.get_result_playlist(data['playlist'])
+    result = recommend.get_result_playlist(data['playlist'])
     result = {'song_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -23,7 +23,7 @@ def get_recommend_by_playlist():
 @app.route('/recommend/song')
 def get_recommend_by_song():
     data = request.get_json()
-    result = model.get_single_song(data['song_id'])
+    result = recommend.get_single_song(data['song_id'])
     result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -34,5 +34,5 @@ def get_recommend_by_song():
 
 
 if __name__ == "__main__":
-    model = modelManager.Model()
+    recommend = recommendManager.Recommend()
     app.run()
