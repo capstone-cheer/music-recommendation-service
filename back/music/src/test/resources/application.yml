@@ -1,0 +1,24 @@
+# test에 한해서 이 application.yml을 사용하게 된다.
+# 실제로 테스트 application.yml과 실행 application.yml을 다르게 설정해서 사용한다.
+
+# 스프링부트는 아래 코드가 다 없어도 알아서 메모리 디비를 만들어서 제공해준다.
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:test #in-memory h2 database 사용.
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create #애플리케이션 실행시점에 내가 가진 엔티티 다 지우고 다시 생성
+# 번외로 create-drop이 있음. create랑 똑같은데, 애플리케이션 종료시점에 한 번 더 다 지워줌.
+#    properties:
+#      hibernate:
+##        show_sql: true #system.out으로 sql 찍어주는거
+#        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug #로그로 sql 찍어주는거
+    org.hibernate.type: trace #더 자세한 로그 찍어줌
