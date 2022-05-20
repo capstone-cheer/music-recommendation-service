@@ -1,4 +1,5 @@
 .idea
 recommendation/models/
+recommendation/datasets/
 *.pyc
 recommendation/__pycache__/
