@@ -1,34 +1,46 @@
+import os
+import json
+
 from gensim.models import KeyedVectors
 import pandas as pd
 
 
 class Recommend:
-    def __init__(self):
-        self.model_path = '../recommendation/models/'
-        self.loaded_model = KeyedVectors.load_word2vec_format(self.model_path + 'w2v_model_song_tag_tv_win5')
+    def __init__(self, external_path):
+        self.MODEL_PATH = os.path.join(external_path, 'models')
+        self.S2V_NAME = 's2v_train_val_win5'
+        self.GNR_SONGS_NAME = 'genre_songs.json'
+        self.s2v_model = KeyedVectors.load_word2vec_format(os.path.join(self.MODEL_PATH, self.S2V_NAME))
+        with open(os.path.join(self.MODEL_PATH, self.GNR_SONGS_NAME), encoding="utf-8") as file:
+            self.gnr_scoring_model = json.load(file)
 
-    def get_result_playlist(self, seed):
+    def get_result_playlist(self, seed, genre):
         get_songs = []
         for song_id in seed:
             try:
-                topn_songs = self.loaded_model.similar_by_word(str(song_id))
+                topn_songs = self.s2v_model.similar_by_word(str(song_id))
                 for song in topn_songs:
                     get_songs.append(song[0])
             except KeyError:
                 pass
-        # 데이터셋 상에 존재하지 않는 노래인 경우 다른 추천 방법론 적용해야 함
         if len(get_songs) == 0:
-            return -1
-        result = list(pd.value_counts(get_songs)[:10].index)
-        return result
+            get_songs = self.get_gnr_score(genre)
+        get_songs = list(pd.value_counts(get_songs)[:10].index)
+        return get_songs
 
-    def get_single_song(self, seed):
+    def get_single_song(self, seed, genre):
         get_songs = []
         try:
-            topn_songs = self.loaded_model.similar_by_word(str(seed))
+            topn_songs = self.s2v_model.similar_by_word(str(seed))
             for song in topn_songs:
                 get_songs.append(song[0])
         # 데이터셋 상에 존재하지 않는 노래인 경우 다른 추천 방법론 적용해야 함
         except KeyError:
-            return -1
+            get_songs = self.get_gnr_score(genre)
+            return get_songs
+        return get_songs
+
+    def get_gnr_score(self, genre):
+        tag_songs_to_series = pd.Series(self.gnr_scoring_model['songs'][genre])
+        get_songs = list(map(int, list(pd.value_counts(tag_songs_to_series)[:10].index)))
         return get_songs

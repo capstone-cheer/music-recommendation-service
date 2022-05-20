@@ -3,13 +3,14 @@ import json
 import recommendation.recommendManager as recommendManager
 
 app = Flask(__name__)
+test_genre = 'idol'
 
 
 # recommend/playlist
 @app.route('/recommend/playlist')
 def get_recommend_by_playlist():
     data = request.get_json()
-    result = recommend.get_result_playlist(data['playlist'])
+    result = recommend.get_result_playlist(data['playlist'], test_genre)
     result = {'song_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -23,7 +24,7 @@ def get_recommend_by_playlist():
 @app.route('/recommend/song')
 def get_recommend_by_song():
     data = request.get_json()
-    result = recommend.get_single_song(data['song_id'])
+    result = recommend.get_single_song(data['song_id'], test_genre)
     result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -34,5 +35,5 @@ def get_recommend_by_song():
 
 
 if __name__ == "__main__":
-    recommend = recommendManager.Recommend()
+    recommend = recommendManager.Recommend('../recommendation')
     app.run()
