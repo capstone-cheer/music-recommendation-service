@@ -210,7 +210,7 @@ Content-type: application/json;charset=UTF-8
 https://h2database.com/h2-2019-10-14.zip
 2. h2 데이터베이스 실행  
 ```zsh
-$ cd ./h2/bin
+$ cd h2/bin
 $ ./h2.sh
 ```
 3. url 수정  
@@ -225,7 +225,7 @@ h2 데이터베이스가 실행상태여야 합니다.
 Java 11버전이 다운로드 되어있어야 합니다.
 1. gradle 빌드  
 ```zsh
-$ cd /back/music
+$ cd back/music
 $ ./gradlew build
 ```
 2. spring 서버 실행  
