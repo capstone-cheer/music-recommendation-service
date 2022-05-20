@@ -1,4 +1,4 @@
-## 📚 API 설계
+## 📚 API 구현 목록
 
 ###### API Reference
 
@@ -201,3 +201,34 @@ Content-type: application/json;charset=UTF-8
 </details>
 
 </details>
+
+
+## 서버 실행 방법
+
+### H2 데이터베이스 설치
+1. 링크로 다운로드 후 압축 해제  
+https://h2database.com/h2-2019-10-14.zip
+2. h2 데이터베이스 실행  
+```zsh
+$ cd ./h2/bin
+$ ./h2.sh
+```
+3. url 수정  
+`xxx.xxx.xxx.xxx:8082/login...` -> `localhost.8082/login...`
+4. .db파일 생성  
+4-1. `JDBC URL` - `jdbc:h2:~/musicapp`  
+4-2. `~/musicapp.mv/db` 파일 생성 확인  
+4-3. 이후 부터는 `JDBC URL` - `jdbc:h2:tcp://localhost/~/musicapp`로 접속
+
+### 서버 실행
+h2 데이터베이스가 실행상태여야 합니다.  
+Java 11버전이 다운로드 되어있어야 합니다.
+1. gradle 빌드  
+```zsh
+$ cd /back/music
+$ ./gradlew build
+```
+2. spring 서버 실행  
+```zsh
+$ java -jar build/libs/music-0.0.1-SNAPSHOT.jar
+```
