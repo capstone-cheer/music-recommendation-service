@@ -34,7 +34,6 @@ class Recommend:
             topn_songs = self.s2v_model.similar_by_word(str(seed))
             for song in topn_songs:
                 get_songs.append(song[0])
-        # 데이터셋 상에 존재하지 않는 노래인 경우 다른 추천 방법론 적용해야 함
         except KeyError:
             get_songs = self.get_gnr_score(genre)
             return get_songs
