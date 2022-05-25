@@ -16,6 +16,7 @@ import spotify.SpotifyService;
 public class Main {
 
 	private static FileWriter outputFile;
+	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify1.json";
 
 	public static void main(String[] args) throws Exception {
 		SpotifyService.initialize();
@@ -23,14 +24,13 @@ public class Main {
 		SpotifyApi spotifyApi = SpotifyService.getSpotifyService();
 
 		String accessToken = spotifyApi.getAccessToken();
-		//System.out.println("accessToken = " + accessToken);
 
 		JSONParser parser = new JSONParser();
-		Reader reader = new FileReader("./src/main/java/data/melon_to_spotify.json");
+		Reader reader = new FileReader(TARGET_FILE);
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(20001, 25000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(21001, 23000); // [] 폐구간
 		for (List<String> melonDataSet : melonDataSets) {
 			JSONObject jsonObject = new JSONObject();
 			String artist = melonDataSet.get(0);
@@ -64,7 +64,7 @@ public class Main {
 
 			jsonArray.add(jsonObject);
 		}
-		outputFile = new FileWriter("./src/main/java/data/melon_to_spotify.json", false);
+		outputFile = new FileWriter(TARGET_FILE, false);
 		outputFile.write(jsonArray.toJSONString());
 		outputFile.flush();
 
