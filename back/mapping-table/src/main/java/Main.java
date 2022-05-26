@@ -23,14 +23,16 @@ public class Main {
 
 		SpotifyApi spotifyApi = SpotifyService.getSpotifyService();
 
-		String accessToken = spotifyApi.getAccessToken();
+		make_mapping_table(spotifyApi);
+	}
 
+	private static void make_mapping_table(SpotifyApi spotifyApi) throws Exception {
 		JSONParser parser = new JSONParser();
 		Reader reader = new FileReader(TARGET_FILE);
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(21001, 23000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(38001, 42000); // [] 폐구간
 		for (List<String> melonDataSet : melonDataSets) {
 			JSONObject jsonObject = new JSONObject();
 			String artist = melonDataSet.get(0);
@@ -67,7 +69,6 @@ public class Main {
 		outputFile = new FileWriter(TARGET_FILE, false);
 		outputFile.write(jsonArray.toJSONString());
 		outputFile.flush();
-
 	}
 
 	private static List<String>[] readJsonFile(int start, int end) throws Exception {
