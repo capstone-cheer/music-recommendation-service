@@ -1,0 +1,23 @@
+.playlist__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 40px;
+    color: #bdbdbd;
+    box-sizing: border-box;
+}
+
+.playlist__box:hover{
+    background-color: gray;
+    color: black;
+}
+
+.playlist__name {
+    width: 15vw;
+    font-size: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    box-sizing: border-box;
+}

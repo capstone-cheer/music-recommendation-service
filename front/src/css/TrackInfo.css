@@ -1,0 +1,47 @@
+.track__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid #1b1b1b;
+}
+
+.track__info:hover{
+    background-color: gray;
+    color: black;
+}
+
+.track__order {
+    width: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.track__cover {
+    height: 50px;
+    width: 50px;
+}
+
+.track__detail {
+    color: white;
+    display: flex;
+    flex-grow: 1;
+    height: 40px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.album__title__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 100px;
+    overflow: hidden;
+}
+
+.artist__box {
+    padding: 0px;
+    overflow: hidden;
+}

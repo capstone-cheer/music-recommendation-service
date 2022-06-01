@@ -1,0 +1,14 @@
+.playlist__frame {
+    display: flex;
+    height: 250px;
+    overflow: scroll;
+}
+
+.playlist__frame > ul {
+    display: flex;
+}
+
+.playlist__frame > ul > li {
+    display: flex;
+    width: 300px;
+}
