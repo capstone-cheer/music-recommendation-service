@@ -1,28 +1,23 @@
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.list.AbstractLinkedList;
-import org.apache.hc.core5.http.ParseException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import se.michaelthelin.spotify.SpotifyApi;
-import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.special.SearchResult;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
-import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 import spotify.SpotifyService;
 
 public class Main {
 
 	private static FileWriter outputFile;
-	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify10.json";
+	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify17.json";
 
 	private final static String OPEN_FILE_AUDIO_ANALYSIS = "./src/main/java/data/melon_to_spotify1.json";
 	private final static String TARGET_FILE_AUDIO_ANALYSIS = "./src/main/java/data/audio_analysis1.json";
@@ -33,7 +28,7 @@ public class Main {
 		SpotifyApi spotifyApi = SpotifyService.getSpotifyService();
 
 		make_mapping_table(spotifyApi);
-//		get_audio_analysis(spotifyApi);
+		//		get_audio_analysis(spotifyApi);
 	}
 
 	private static void make_mapping_table(SpotifyApi spotifyApi) throws Exception {
@@ -42,21 +37,20 @@ public class Main {
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(163001, 168000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(366001, 369000); // [] 폐구간 357001 ~ 378000
 		for (List<String> melonDataSet : melonDataSets) {
-			try{
+			try {
 				JSONObject jsonObject = new JSONObject();
 				String artist = melonDataSet.get(0);
-				// id = 143209에서 album_name null이어서 melonDatasets에 album_name 정보를 append하지 않음. 그리서 get(2) -> get(1), get(3) -> get(2)로 변경
 				String song = melonDataSet.get(1);
 				String id = melonDataSet.get(2);
 
 				String q = song + " " + artist;
-				String type = "track,artist";
+				String type = "track";
 				SearchResult execute = spotifyApi.searchItem(q, type)
-						.limit(1)
-						.build()
-						.execute();
+					.limit(1)
+					.build()
+					.execute();
 				if (execute.getTracks().getItems().length == 0) {
 					jsonObject.put(id, "null");
 					jsonArray.add(jsonObject);
@@ -66,7 +60,7 @@ public class Main {
 				String spotifySongName = track.getName();
 				String spotifyArtistName = track.getArtists()[0].getName();
 				String spotifyId = track.getId();
-				System.out.println(spotifyId +" "+id);
+				System.out.println(spotifyId + " " + id);
 				// System.out.println(id);
 
 				// System.out.println("spotifySongName = " + spotifySongName);
@@ -77,7 +71,7 @@ public class Main {
 				jsonObject.put(id, spotifyId);
 
 				jsonArray.add(jsonObject);
-			} catch (Exception e){
+			} catch (Exception e) {
 				outputFile = new FileWriter(TARGET_FILE, false);
 				outputFile.write(jsonArray.toJSONString());
 				outputFile.flush();
@@ -125,17 +119,16 @@ public class Main {
 		Reader audio_analysis_reader = new FileReader(TARGET_FILE_AUDIO_ANALYSIS);
 		JSONArray audio_analysis_json = (JSONArray)parser.parse(audio_analysis_reader);
 
-
 		int start_melon_id = 21001; // 1 붙여
-		for(int cnt = 0; cnt < 210; cnt++){
+		for (int cnt = 0; cnt < 210; cnt++) {
 			String spotify_ids = "";
 			List<Integer> melon_ids = new ArrayList<>();
-			for(int i = 100*cnt; i < 100+100*cnt; i++){
-				JSONObject jsonObject = (JSONObject) melon_to_spotify_json.get(i);
-				String spotifyId = (String)jsonObject.get(Integer.toString(start_melon_id+i));
-				if(spotifyId.equals("null")){
+			for (int i = 100 * cnt; i < 100 + 100 * cnt; i++) {
+				JSONObject jsonObject = (JSONObject)melon_to_spotify_json.get(i);
+				String spotifyId = (String)jsonObject.get(Integer.toString(start_melon_id + i));
+				if (spotifyId.equals("null")) {
 					continue;
-				} else{
+				} else {
 					melon_ids.add(i);
 					spotify_ids += spotifyId + ",";
 				}
@@ -144,20 +137,20 @@ public class Main {
 			String substr = spotify_ids.substring(0, spotify_ids.length() - 1);
 			System.out.println("substr = " + substr);
 			AudioFeatures[] execute = spotifyApi.getAudioFeaturesForSeveralTracks(substr)
-					.build().execute();
+				.build().execute();
 
 			int here = 0;
 
-			for(int i = 100*cnt; i < 100+100*cnt; i++){
-				if(here == melon_ids.size()){
+			for (int i = 100 * cnt; i < 100 + 100 * cnt; i++) {
+				if (here == melon_ids.size()) {
 					here--;
 				}
 				JSONObject jsonObject = new JSONObject();
-				if(melon_ids.get(here) != i){
+				if (melon_ids.get(here) != i) {
 					makeNullJson(jsonObject);
-				} else{
+				} else {
 					AudioFeatures audioFeature;
-					try{
+					try {
 						audioFeature = execute[here];
 						jsonObject.put("tempo", audioFeature.getTempo());
 						jsonObject.put("acousticness", audioFeature.getAcousticness());
@@ -166,7 +159,7 @@ public class Main {
 						jsonObject.put("loudness", audioFeature.getLoudness());
 						jsonObject.put("speechiness", audioFeature.getSpeechiness());
 						here++;
-					} catch(Exception e){
+					} catch (Exception e) {
 						System.out.println("e.getMessage() = " + e.getMessage());
 						makeNullJson(jsonObject);
 					}
