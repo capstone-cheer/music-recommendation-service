@@ -22,7 +22,7 @@ import spotify.SpotifyService;
 public class Main {
 
 	private static FileWriter outputFile;
-	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify1.json";
+	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify10.json";
 
 	private final static String OPEN_FILE_AUDIO_ANALYSIS = "./src/main/java/data/melon_to_spotify1.json";
 	private final static String TARGET_FILE_AUDIO_ANALYSIS = "./src/main/java/data/audio_analysis1.json";
@@ -32,8 +32,8 @@ public class Main {
 
 		SpotifyApi spotifyApi = SpotifyService.getSpotifyService();
 
-//		make_mapping_table(spotifyApi);
-		get_audio_analysis(spotifyApi);
+		make_mapping_table(spotifyApi);
+//		get_audio_analysis(spotifyApi);
 	}
 
 	private static void make_mapping_table(SpotifyApi spotifyApi) throws Exception {
@@ -42,39 +42,47 @@ public class Main {
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(38001, 42000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(163001, 168000); // [] 폐구간
 		for (List<String> melonDataSet : melonDataSets) {
-			JSONObject jsonObject = new JSONObject();
-			String artist = melonDataSet.get(0);
-			String song = melonDataSet.get(2);
-			String id = melonDataSet.get(3);
+			try{
+				JSONObject jsonObject = new JSONObject();
+				String artist = melonDataSet.get(0);
+				// id = 143209에서 album_name null이어서 melonDatasets에 album_name 정보를 append하지 않음. 그리서 get(2) -> get(1), get(3) -> get(2)로 변경
+				String song = melonDataSet.get(1);
+				String id = melonDataSet.get(2);
 
-			String q = song + " " + artist;
-			String type = "track,artist";
-			SearchResult execute = spotifyApi.searchItem(q, type)
-				.limit(1)
-				.build()
-				.execute();
-			if (execute.getTracks().getItems().length == 0) {
-				jsonObject.put(id, "null");
+				String q = song + " " + artist;
+				String type = "track,artist";
+				SearchResult execute = spotifyApi.searchItem(q, type)
+						.limit(1)
+						.build()
+						.execute();
+				if (execute.getTracks().getItems().length == 0) {
+					jsonObject.put(id, "null");
+					jsonArray.add(jsonObject);
+					continue;
+				}
+				Track track = execute.getTracks().getItems()[0];
+				String spotifySongName = track.getName();
+				String spotifyArtistName = track.getArtists()[0].getName();
+				String spotifyId = track.getId();
+				System.out.println(spotifyId +" "+id);
+				// System.out.println(id);
+
+				// System.out.println("spotifySongName = " + spotifySongName);
+				// System.out.println("spotifyArtistName = " + spotifyArtistName);
+				// System.out.println("melon song name: " + song);
+				// System.out.println("melon artist: " + artist);
+
+				jsonObject.put(id, spotifyId);
+
 				jsonArray.add(jsonObject);
-				continue;
+			} catch (Exception e){
+				outputFile = new FileWriter(TARGET_FILE, false);
+				outputFile.write(jsonArray.toJSONString());
+				outputFile.flush();
+				return;
 			}
-			Track track = execute.getTracks().getItems()[0];
-			String spotifySongName = track.getName();
-			String spotifyArtistName = track.getArtists()[0].getName();
-			String spotifyId = track.getId();
-			System.out.println(spotifyId +" "+id);
-			// System.out.println(id);
-
-			// System.out.println("spotifySongName = " + spotifySongName);
-			// System.out.println("spotifyArtistName = " + spotifyArtistName);
-			// System.out.println("melon song name: " + song);
-			// System.out.println("melon artist: " + artist);
-
-			jsonObject.put(id, spotifyId);
-
-			jsonArray.add(jsonObject);
 		}
 		outputFile = new FileWriter(TARGET_FILE, false);
 		outputFile.write(jsonArray.toJSONString());
@@ -95,13 +103,13 @@ public class Main {
 		int ind = 0;
 		for (int id = start; id < end + 1; id++) {
 			JSONObject jsonObject = (JSONObject)jsonArray.get(id);
-			String album_name = jsonObject.get("album_name").toString();
+			//String album_name = jsonObject.get("album_name").toString(); // id = 143209에서 album_name null이어서 주석처리
 			JSONArray artist_name_basket = (JSONArray)jsonObject.get("artist_name_basket");
 			String artist_name = artist_name_basket.get(0).toString();
 			String song_name = jsonObject.get("song_name").toString();
 
 			ret[ind].add(artist_name);
-			ret[ind].add(album_name);
+			//ret[ind].add(album_name); // id = 143209에서 album_name null이어서 주석처리
 			ret[ind].add(song_name);
 			ret[ind++].add(Integer.toString(id));
 		}
@@ -159,6 +167,7 @@ public class Main {
 						jsonObject.put("speechiness", audioFeature.getSpeechiness());
 						here++;
 					} catch(Exception e){
+						System.out.println("e.getMessage() = " + e.getMessage());
 						makeNullJson(jsonObject);
 					}
 				}
