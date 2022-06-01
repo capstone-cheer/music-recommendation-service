@@ -22,7 +22,7 @@ import spotify.SpotifyService;
 public class Main {
 
 	private static FileWriter outputFile;
-	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify1.json";
+	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify17.json";
 
 	private final static String OPEN_FILE_AUDIO_ANALYSIS = "./src/main/java/data/melon_to_spotify1.json";
 	private final static String TARGET_FILE_AUDIO_ANALYSIS = "./src/main/java/data/audio_analysis1.json";
@@ -32,8 +32,8 @@ public class Main {
 
 		SpotifyApi spotifyApi = SpotifyService.getSpotifyService();
 
-//		make_mapping_table(spotifyApi);
-		get_audio_analysis(spotifyApi);
+		make_mapping_table(spotifyApi);
+// 		get_audio_analysis(spotifyApi);
 	}
 
 	private static void make_mapping_table(SpotifyApi spotifyApi) throws Exception {
@@ -42,15 +42,15 @@ public class Main {
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(38001, 42000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(363001, 366000); // [] 폐구간 357001 ~ 378000
 		for (List<String> melonDataSet : melonDataSets) {
 			JSONObject jsonObject = new JSONObject();
 			String artist = melonDataSet.get(0);
-			String song = melonDataSet.get(2);
-			String id = melonDataSet.get(3);
+			String song = melonDataSet.get(1);
+			String id = melonDataSet.get(2);
 
 			String q = song + " " + artist;
-			String type = "track,artist";
+			String type = "track";
 			SearchResult execute = spotifyApi.searchItem(q, type)
 				.limit(1)
 				.build()
@@ -95,13 +95,13 @@ public class Main {
 		int ind = 0;
 		for (int id = start; id < end + 1; id++) {
 			JSONObject jsonObject = (JSONObject)jsonArray.get(id);
-			String album_name = jsonObject.get("album_name").toString();
+			//String album_name = jsonObject.get("album_name").toString();
 			JSONArray artist_name_basket = (JSONArray)jsonObject.get("artist_name_basket");
 			String artist_name = artist_name_basket.get(0).toString();
 			String song_name = jsonObject.get("song_name").toString();
 
 			ret[ind].add(artist_name);
-			ret[ind].add(album_name);
+			//ret[ind].add(album_name);
 			ret[ind].add(song_name);
 			ret[ind++].add(Integer.toString(id));
 		}
