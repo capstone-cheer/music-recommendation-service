@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Spotify Api Key ###
+/src/main/java/server/music/spotify/api
