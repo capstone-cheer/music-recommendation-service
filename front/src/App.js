@@ -1,5 +1,6 @@
 import './css/App.css';
 import React, { useEffect, useState} from 'react';
+import { Link, Route, Routes } from "react-router-dom";
 import Login from './components/Login';
 import Main from './components/Main';
 import AppContext from './components/AppContext';
@@ -31,14 +32,17 @@ function App() {
       setIsLoggedIn(true)
       console.log('isLoggedIn? -> ', isLoggedIn)
     }
-  })
+  }, []);
 
 
   return (
     <AppContext.Provider value={globalVar}>
       <div className="App">
         {isLoggedIn ? // 로그인 세션 확인하고 화면 렌더링 
-          <Main isLoggedin={isLoggedIn} /> :
+          <Routes>
+              <Route path="/" element={<Main isLoggedin={isLoggedIn} />} exact={true}></Route>
+              <Route path="/callback" element={<Main isLoggedin={isLoggedIn} />} exact={true}></Route>
+          </Routes> :
           <Login />}
       </div>
     </AppContext.Provider>

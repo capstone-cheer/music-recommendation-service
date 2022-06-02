@@ -56,3 +56,11 @@
     box-shadow: 0;
     padding: 10px;
 }
+
+.spotify__login__btn {
+    color: white;
+    background-color: transparent;
+    border: 0;
+    padding-left: 10px;
+    box-shadow: 0;
+}
