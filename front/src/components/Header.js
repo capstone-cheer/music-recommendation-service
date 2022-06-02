@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { IoSearch } from "react-icons/io5";
 import "../css/Header.css";
+import LoginStatus from "./LoginStatus";
 import AppContext from "./AppContext";
 
 // Main > Header
@@ -47,6 +48,10 @@ function Header(props) {
                         <IoSearch size='24' color="white"/>
                     </button>
                 </div>
+            </div>
+
+            <div>
+                <LoginStatus />
             </div>
         </div>
     );
