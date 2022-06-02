@@ -8,6 +8,7 @@ import axios from "axios";
 function LoginStatus(props) {
     const [SpotifyAuthToken, setSpotifyAuthToken] = useState();
     const [spotifyId, setSpotifyId] = useState();
+    const config = require('../config.json');
 
     const fetchSpotifyProfile = async () => {
         await axios.get("https://api.spotify.com/v1/me", {
@@ -84,7 +85,7 @@ function LoginStatus(props) {
                             <SpotifyAuth
                                 btnClassName="spotify__login__btn"
                                 redirectUri={ "http://localhost:3000/callback/" }
-                                clientID={ "0446e28ab96644b9995387ccf77372d6" }
+                                clientID={ config.development.spotify_client_id }
                                 title={"Spotify Login"}
                                 noLogo={true}
                                 scopes={ [
