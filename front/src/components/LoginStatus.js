@@ -89,6 +89,7 @@ function LoginStatus(props) {
                                 title={"Spotify Login"}
                                 noLogo={true}
                                 scopes={ [
+                                "streaming",
                                 "user-read-currently-playing",
                                 "user-read-recently-played",
                                 "user-read-playback-state",
@@ -96,6 +97,8 @@ function LoginStatus(props) {
                                 "user-modify-playback-state",
                                 "user-read-private", 
                                 "user-read-email", 
+                                "user-library-read",
+                                "user-library-modify",
                                 ] }
                             />
                         </div>
