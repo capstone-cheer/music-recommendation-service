@@ -7,8 +7,11 @@ import AppContext from './components/AppContext';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+
+  //전역변수
   const [ searchRequest, setSearchRequest ] = useState(null);
   const [ selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [ playingPlaylist, setPlayingPlaylist] = useState(null);
 
   const changeSearchRequest = (value) => {
     setSearchRequest(value);
@@ -18,11 +21,17 @@ function App() {
     setSelectedPlaylist(value);
   }
 
+  const changePlayingPlaylist = (value) => {
+    setPlayingPlaylist(value);
+  }
+
   const globalVar = {
     searchRequest: searchRequest,
     selectedPlaylist: selectedPlaylist,
+    playingPlaylist: playingPlaylist,
     changeSearchRequest,
     changeSelectedPlaylist,
+    changePlayingPlaylist
   }
 
   useEffect(() => {
