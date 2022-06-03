@@ -41,7 +41,7 @@ function App() {
         {isLoggedIn ? // 로그인 세션 확인하고 화면 렌더링 
           <Routes>
               <Route path="/" element={<Main isLoggedin={isLoggedIn} />} exact={true}></Route>
-              <Route path="/callback" element={<Main isLoggedin={isLoggedIn} />} exact={true}></Route>
+              <Route path="/callback" element={<Main isLoggedin={isLoggedIn} />} ></Route>
           </Routes> :
           <Login />}
       </div>
