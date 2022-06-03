@@ -73,8 +73,9 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid #2d2d2d;
-    padding-bottom: 5px;
-    font-weight: bold;
+    padding: 10px;
+    color: gray;
+    font-size: 12px;
 }
 
 .search__result__category__title {
