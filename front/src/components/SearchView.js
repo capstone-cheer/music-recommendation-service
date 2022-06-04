@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../css/SearchView.css";
 import AppContext from "./AppContext";
-import { IoAddCircle } from "react-icons/io5"
+import { IoAddCircle, IoPlayCircle } from "react-icons/io5"
 
 const tracks = [
     {'id':'1', 'title':'title1', 'artist':'qasdf234we', 'album':'123'},
@@ -38,7 +38,10 @@ function SearchResultCategory() {
 };
 
 function SearchResultTrack(props) {
-    const [isHovering, setIsHovering] = useState(0);
+    const [isMouseOver, setIsMouseOver] = useState(0);
+    const submitTrackToPlay = (value) => {
+        console.log(value);
+    }
 
     const addTrackToPlaylist = () => {
         // 선택한 트랙을 현재 재생 중인 플레이리스트에 추가
@@ -48,12 +51,23 @@ function SearchResultTrack(props) {
 
     // 35 25 20 5
     return (
-        <div className="search__result__track">
+        <div className="search__result__track" onMouseOver={ () => setIsMouseOver(1)}
+                                                onMouseOut={ () => setIsMouseOver(0)}>
             <div className="search__result__track__title">
-                <img src="https://i.scdn.co/image/ab67616d00001e027359994525d219f64872d3b1" 
-                    className="search__result__track__cover" 
-                    alt="cover"
+                {isMouseOver ?
+                    <div className="search__result__track__play__button">
+                        <button onClick={ () => {
+                            submitTrackToPlay(props.track.id)
+                        }}>
+                            <IoPlayCircle className="search__result__track__play__circle" size='50' color="#1db954" />
+                        </button>
+                    </div>
+                    : <img src="https://i.scdn.co/image/ab67616d00001e027359994525d219f64872d3b1" 
+                            className="search__result__track__cover" 
+                            alt="cover"
                 />
+                }
+
                 <p>{props.track.title}</p>
             </div>
             <div className="search__result__track__album">

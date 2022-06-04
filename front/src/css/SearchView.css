@@ -32,6 +32,29 @@
     width: 35vw;
 }
 
+.search__result__track__play__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__track__play__button > button {
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__track__play__circle {
+    margin: 0;
+}
+
+
 .search__result__track__cover {
     height: 50px;
     width: 50px;

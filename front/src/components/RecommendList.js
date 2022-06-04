@@ -44,7 +44,7 @@ function RecommendList(props) {
                 </div>
                 <div className="recommend__track__list">
                     {playlist.tracks && playlist.tracks.map((track, index) => (
-                        <TrackInfo track={track} />
+                        <TrackInfo track={track} order={index+1} />
                     ))}
                 </div>    
             </div>
