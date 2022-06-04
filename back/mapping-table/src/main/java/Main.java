@@ -17,7 +17,7 @@ import spotify.SpotifyService;
 public class Main {
 
 	private static FileWriter outputFile;
-	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify17.json";
+	private final static String TARGET_FILE = "./src/main/java/data/melon_to_spotify19.json";
 
 	private final static String OPEN_FILE_AUDIO_ANALYSIS = "./src/main/java/data/melon_to_spotify1.json";
 	private final static String TARGET_FILE_AUDIO_ANALYSIS = "./src/main/java/data/audio_analysis1.json";
@@ -37,7 +37,7 @@ public class Main {
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(366001, 369000); // [] 폐구간 357001 ~ 378000
+		List<String>[] melonDataSets = readJsonFile(430000, 435000); // [] 폐구간 420001 ~ 441000
 		for (List<String> melonDataSet : melonDataSets) {
 			try {
 				JSONObject jsonObject = new JSONObject();
@@ -72,6 +72,7 @@ public class Main {
 
 				jsonArray.add(jsonObject);
 			} catch (Exception e) {
+				e.printStackTrace();
 				outputFile = new FileWriter(TARGET_FILE, false);
 				outputFile.write(jsonArray.toJSONString());
 				outputFile.flush();
