@@ -16,11 +16,23 @@
 
 .playlist__info__name {
     display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-between;
     color: white;
     font-size: 36px;
     padding: 15px;
     font-weight: bold;
     padding-bottom: 0px;
+}
+.playlist__info__name > p {
+    margin: 0;
+}
+
+.playlist__info__name > button {
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0;
 }
 
 .track__category {
