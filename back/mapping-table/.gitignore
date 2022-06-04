@@ -1,3 +1,6 @@
+src/main/java/spotify/api
+src/main/java/data/song_meta.json
+
 HELP.md
 .gradle
 build/
@@ -35,5 +38,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-src/main/java/server/music/spotify/api
