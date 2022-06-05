@@ -3,6 +3,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import "../css/RecommendList.css";
 import TrackCategory from "./TrackCategory";
 import TrackInfo from "./TrackInfo";
+import RecommendSettingPopup from "./RecommendSettingPopup";
 
 const playlist = {
     'id':'1',
@@ -25,18 +26,37 @@ const playlist = {
     ]
 }
 
+const categorySetting = [
+    { 'category_name' : 'cate1', 'isChecked': true },
+    { 'category_name' : 'cate2', 'isChecked': false },
+    { 'category_name' : 'cate3', 'isChecked': true },
+    { 'category_name' : 'cate4', 'isChecked': true },
+]
 
 function RecommendList(props) {
+    const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
+
+    const openRecommendSetting = () => {
+        // 추천 카테고리 설정 fetch
+        setRecommendSettingOpen(true);
+      };
+    const closeRecommendSetting = () => {
+        setRecommendSettingOpen(false);
+    };
+
     return(
         <div className="recommend__list">
             <div className="recommend__title">
                 RECOMMEND LIST
             </div>
             <div className="setting__button">
-                <button>
+                <button onClick={openRecommendSetting}>
                     <IoSettingsOutline className="setting__icon" size='24' />
                 </button>
             </div>
+            <RecommendSettingPopup open={recommendSettingOpen} 
+                                    close={closeRecommendSetting}
+                                    categorySetting={categorySetting} />
 
             <div className="recommend__tracks">
                 <div className="recommend__track__category">
