@@ -8,7 +8,7 @@ const fetchLogin = async (loginId, password) => {
 
     // 서버에 로그인 요청
 
-    sessionStorage.setItem('user_id', 'test');
+    sessionStorage.setItem('member_id', '1');
     window.location.replace("/");
 }
 

@@ -72,7 +72,7 @@ function LoginStatus(props) {
                                 <IoPersonCircleOutline size='24' color="white" />
                             </div>
                             <div className="local__login__info">
-                                {sessionStorage.getItem('user_id')}
+                                {sessionStorage.getItem('member_id')}
                             </div>
                         </div>
                         <div className="spotify__login__status">

@@ -35,7 +35,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(sessionStorage.getItem('user_id') === null){
+    if(sessionStorage.getItem('member_id') === null){
       console.log('isLoggedIn? -> ', isLoggedIn)
     } else {
       setIsLoggedIn(true)
