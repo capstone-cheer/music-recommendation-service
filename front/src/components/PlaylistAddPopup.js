@@ -9,6 +9,7 @@ function PlaylistAddPopup(props) {
     }
 
     const postPlaylistCreate = async (inputPlaylistName) => {
+        // @PostMapping("/playlists/{member_id}/create")
         await axios.post("/playlists/"+sessionStorage.getItem('member_id')+'/create', {
             member_id: sessionStorage.getItem('member_id'),
             name: inputPlaylistName
@@ -19,9 +20,8 @@ function PlaylistAddPopup(props) {
 
     const submitPlaylistName = () => {
         // fetch하고 창 닫기
-        //@PostMapping("/playlists/{member_id}/create")
         postPlaylistCreate(inputPlaylistName);
-        console.log(inputPlaylistName)
+        setInputPlaylistName('');
         props.close()
     }
 
