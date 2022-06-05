@@ -7,11 +7,11 @@ test_genre = 'idol'
 
 
 # recommend/playlist
-@app.route('/recommend/playlist')
+@app.route('/recommend/playlist', methods=['POST'])
 def get_recommend_by_playlist():
     data = request.get_json()
-    result = recommend.get_result_playlist(data['playlist'], test_genre)
-    result = {'song_list': result}
+    result = recommend.get_by_playlist(data['playlist'], test_genre)
+    result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
         status=200,
@@ -21,10 +21,10 @@ def get_recommend_by_playlist():
 
 
 # recommend/song
-@app.route('/recommend/song')
+@app.route('/recommend/song', methods=['POST'])
 def get_recommend_by_song():
     data = request.get_json()
-    result = recommend.get_single_song(data['song_id'], test_genre)
+    result = recommend.get_by_single_song(data['song_id'], test_genre)
     result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
