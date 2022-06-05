@@ -7,18 +7,19 @@ import pandas as pd
 
 class Recommend:
     def __init__(self, external_path):
+        self.topn = 10
         self.MODEL_PATH = os.path.join(external_path, 'models')
-        self.S2V_NAME = 's2v_train_val_win5'
+        self.S2V_NAME = 's2v_train_win5'
         self.GNR_SONGS_NAME = 'genre_songs.json'
-        self.s2v_model = KeyedVectors.load_word2vec_format(os.path.join(self.MODEL_PATH, self.S2V_NAME))
+        # self.s2v_model = KeyedVectors.load_word2vec_format(os.path.join(self.MODEL_PATH, self.S2V_NAME))
         with open(os.path.join(self.MODEL_PATH, self.GNR_SONGS_NAME), encoding="utf-8") as file:
             self.gnr_scoring_model = json.load(file)
 
-    def get_result_playlist(self, seed, genre):
+    def get_by_playlist(self, seed, genre):
         get_songs = []
         for song_id in seed:
             try:
-                topn_songs = self.s2v_model.similar_by_word(str(song_id))
+                topn_songs = self.s2v_model.similar_by_word(str(song_id), topn=self.topn)
                 for song in topn_songs:
                     get_songs.append(song[0])
             except KeyError:
@@ -28,10 +29,11 @@ class Recommend:
         get_songs = list(pd.value_counts(get_songs)[:10].index)
         return get_songs
 
-    def get_single_song(self, seed, genre):
+    def get_by_single_song(self, seed, genre):
         get_songs = []
         try:
-            topn_songs = self.s2v_model.similar_by_word(str(seed))
+            # topn_songs : List<tuple>
+            topn_songs = self.s2v_model.similar_by_word(str(seed), topn=self.topn)
             for song in topn_songs:
                 get_songs.append(song[0])
         except KeyError:
@@ -40,6 +42,9 @@ class Recommend:
         return get_songs
 
     def get_gnr_score(self, genre):
-        tag_songs_to_series = pd.Series(self.gnr_scoring_model['songs'][genre])
+        try:
+            tag_songs_to_series = pd.Series(self.gnr_scoring_model['songs'][genre])
+        except KeyError:
+            tag_songs_to_series = pd.Series(self.gnr_scoring_model['songs']['pop'])
         get_songs = list(map(int, list(pd.value_counts(tag_songs_to_series)[:10].index)))
         return get_songs
