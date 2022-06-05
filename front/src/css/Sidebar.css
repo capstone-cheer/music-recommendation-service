@@ -20,6 +20,38 @@
     box-sizing: border-box;
 }
 
+.playlist__add__button {
+    padding-left: 5px;
+}
+
+.add__new__playlist {
+    display: flex;
+    width: 15vw;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    border: 0;
+}
+
+.add__new__playlist:hover{
+    background-color: gray;
+    color: black;
+}
+
+.add__button__text {
+    flex-grow: 1;
+}
+
+.add__button__text > p {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
 .sidebar > ul {
     list-style: none;
     overflow: auto;

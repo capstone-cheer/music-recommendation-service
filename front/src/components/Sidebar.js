@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import "../css/Sidebar.css";
 import Playlist from "./Playlist";
 import AppContext from "./AppContext";
@@ -18,6 +19,12 @@ function Sidebar(props) {
     return (
         <div className="sidebar">
             <div className="sidebar__title">PLAYLISTS</div>
+            <button className="add__new__playlist">
+                <BsFillPlusCircleFill className="playlist__add__button" size={20} color="#1db954"/>
+                <div className="add__button__text">
+                    <p>New Playlist</p>
+                </div>
+            </button>
             <ul>
                 {props.playlists && props.playlists.map((playlist, index) => (
                     <li key={index}>
