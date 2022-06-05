@@ -1,0 +1,5 @@
+.player {
+    display: flex;
+    height: 15vh;
+    background-color: darkkhaki;
+}

@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    width: 85vw;
+    height: 75vh;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.category__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.category__belt {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.category__belt > hr {
+    border: 0.5px solid #282828;
+    margin: 0;
+    padding: 0;
+}
+
+.category__name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.select__container {
+    display: flex;
+    width: 85vw;
+    height: 75vh;
+    flex-direction: row;
+    justify-content: space-between;
+}

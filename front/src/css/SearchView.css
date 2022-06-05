@@ -1,0 +1,131 @@
+.search__view {
+    color: white;
+}
+
+.search__view > ul {
+    list-style: none;
+    overflow: scroll;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__num {
+    padding: 5px;
+}
+
+
+
+.search__result__track {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.search__result__track:hover{
+    background-color: gray;
+    color: black;
+}
+
+.search__result__track__title {
+    display: flex;
+    flex-direction: row;
+    width: 35vw;
+}
+
+.search__result__track__play__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__track__play__button > button {
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__track__play__circle {
+    margin: 0;
+}
+
+
+.search__result__track__cover {
+    height: 50px;
+    width: 50px;
+}
+
+.search__result__track__title > p {
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.search__result__track__album {
+    display: flex;
+    flex-direction: row;
+    width: 25vw;
+}
+
+.search__result__track__artist {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+}
+
+.search__result__track__add {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+}
+
+.search__result__track__add > button {
+    background-color: transparent;
+    border: 0;
+}
+
+
+.search__result__category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #2d2d2d;
+    padding: 10px;
+    color: gray;
+    font-size: 12px;
+}
+
+.search__result__category__title {
+    text-align: left;
+    width: 35vw;
+}
+
+.search__result__category__title > p {
+    margin: 0;
+}
+
+.search__result__category__album {
+    flex-grow: 1;
+    text-align: left;
+    width: 25vw;
+}
+
+.search__result__category__album > p {
+    margin: 0;
+}
+
+.search__result__category__artist {
+    flex-grow: 1;
+    text-align: left;
+    width: 25vw;
+}
+
+.search__result__category__artist > p {
+    margin: 0;
+}

@@ -1,0 +1,25 @@
+.LoginForm {
+    display: flex;
+    justify-content: center;
+    padding-top: 20%;
+}
+
+.LoginContainer {
+    display: flex;
+    padding: 5%;
+    flex-grow: 1;
+    flex-direction: column;
+    border: solid 1px;
+    max-width: 30%;
+}
+
+.LoginContainer > input {
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.LoginContainer > button {
+    font-size: 15px;
+    line-height: 30px;
+    background-color: antiquewhite;
+}
