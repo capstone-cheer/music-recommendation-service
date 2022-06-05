@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Container from "./Container";
+import axios from "axios";
 import "../css/Body.css";
 
 const playlists = [
@@ -14,6 +15,19 @@ const playlists = [
 
 // Main > Body
 function Body(props) {
+    const [playlists, setPlaylists] = useState([]);
+    const getUserPlaylists = async () => {
+        await axios.get("/playlists/"+sessionStorage.getItem('member_id'))
+        .then(function (res) {
+            setPlaylists(res.data)
+        })
+    }
+
+    useEffect(() => {
+        getUserPlaylists()
+    })
+
+
     return (
         <div className="body">
             <Sidebar 
