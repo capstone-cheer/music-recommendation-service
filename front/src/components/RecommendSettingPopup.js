@@ -3,7 +3,55 @@ import '../css/RecommendSettingPopup.css';
 
 
 
+function CategoryLable(props) {
+    const [isChecked, setIsChecked] = useState(false);
+
+    const checkedHandler = ({ target }) => {
+        setIsChecked(!isChecked);
+        props.checkedCategoryHandler(props.category.id, target.checked);
+    }
+
+    return (
+        <div className='category__label'>
+            <input type="checkbox" 
+                    name="category" 
+                    value={props.category.category_name}
+                    onChange={ e => {
+                        checkedHandler(e);
+                        console.log('click')
+                    }}
+            />
+            {props.category.category_name}
+        </div>
+    );
+}
+
 function RecommendSettingPopup(props){
+    const [checkedCategory, setCheckedCategory] = useState(new Set());
+
+    const checkedCategoryHandler = (id, isChecked) => {
+        if(isChecked) {
+            checkedCategory.add(id);
+            setCheckedCategory(checkedCategory);
+        }
+        else if (!isChecked && checkedCategory.has(id)) {
+            checkedCategory.delete(id);
+            setCheckedCategory(checkedCategory);
+        }
+    }
+    
+    const submitRecommendSetting = () => {
+        // 선택된 카테고리가 있을때만 fetch
+        if (checkedCategory.size > 0) {
+            //fetch하고 close
+            props.close();
+        }
+
+        else {
+            // alert
+        }
+    }
+
     return (
         <div className={props.open ? 'open recommend__setting__popup' : 'recommend__setting__popup'}>
             {props.open ? (
@@ -17,22 +65,13 @@ function RecommendSettingPopup(props){
                 <main>
                     <ul className='category__list__table'>
                         {props.categorySetting && props.categorySetting.map((category, index) => (
-                            <div className='category__label'>
-                                <input type="checkbox" 
-                                        name="category" 
-                                        value={category.category_name}
-                                        onChange={ e => {
-                                            //checkEvent(index, e.target.value, e.target.checked);
-                                            console.log('click')
-                                        }}
-                                />
-                                {category.category_name}
-                            </div>
+                            <CategoryLable category={category} checkedCategoryHandler={checkedCategoryHandler}/>
                         ))}
                     </ul>
                 </main>
                 <footer>
-                    <button className='recommend__setting__popup__submit__button'>
+                    <button className='recommend__setting__popup__submit__button'
+                            onClick={submitRecommendSetting}>
                         Submit
                     </button>
                     <button className="recommend__setting__popup__close__button" onClick={props.close}>

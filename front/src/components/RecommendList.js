@@ -27,10 +27,10 @@ const playlist = {
 }
 
 const categorySetting = [
-    { 'category_name' : 'cate1', 'isChecked': true },
-    { 'category_name' : 'cate2', 'isChecked': false },
-    { 'category_name' : 'cate3', 'isChecked': true },
-    { 'category_name' : 'cate4', 'isChecked': true },
+    { 'id':'1', 'category_name' : 'cate1', 'isChecked': true },
+    { 'id':'2', 'category_name' : 'cate2', 'isChecked': false },
+    { 'id':'3', 'category_name' : 'cate3', 'isChecked': true },
+    { 'id':'4', 'category_name' : 'cate4', 'isChecked': true },
 ]
 
 function RecommendList(props) {
