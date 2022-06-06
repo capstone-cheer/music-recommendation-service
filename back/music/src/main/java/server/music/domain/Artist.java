@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,8 +20,7 @@ public class Artist {
 	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
 	List<Song> songList = new ArrayList<>();
 	@Id
-	@GeneratedValue
 	@Column(name = "artist_id")
-	private Long id;
+	private String id;
 	private String name;
 }

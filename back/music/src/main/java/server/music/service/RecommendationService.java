@@ -7,8 +7,6 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.JsonObject;
-
 import lombok.RequiredArgsConstructor;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.specification.Track;
@@ -35,7 +33,7 @@ public class RecommendationService {
 		StringBuilder sb = new StringBuilder();
 		for (String spotifySongId : songIdList) {
 			if (spotifySongId.length() > 7) { //스포티파이 아이디
-				sb.append(spotifySongId+",");
+				sb.append(spotifySongId + ",");
 			}
 		}
 		String substring = sb.substring(0, sb.length() - 1);
@@ -44,10 +42,10 @@ public class RecommendationService {
 			Track[] execute = spotifyApi.getSeveralTracks(substring).build().execute();
 			for (Track track : execute) {
 				ret.add(new SongResultDto(
-					track.getId(),
-					track.getName(),
-					track.getAlbum().getName(),
-					track.getArtists()[0].getName() //일단 한명만
+						track.getId(),
+						track.getName(),
+						track.getAlbum().getName(),
+						track.getArtists()[0].getName() //일단 한명만
 				));
 			}
 		} catch (Exception e) {

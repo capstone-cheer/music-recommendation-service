@@ -3,6 +3,7 @@ package server.music.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import server.music.domain.Member;
@@ -10,6 +11,7 @@ import server.music.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
 
 	private final MemberRepository memberRepository;
@@ -17,6 +19,7 @@ public class MemberService {
 	/**
 	 * 회원가입
 	 */
+	@Transactional
 	public Long register(Member member) {
 		validateMember(member);
 		return memberRepository.save(member);

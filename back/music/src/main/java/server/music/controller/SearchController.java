@@ -5,6 +5,7 @@ import org.apache.hc.core5.http.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -24,8 +25,8 @@ public class SearchController {
     private final SpotifyApi spotifyApi;
 
     @GetMapping("/search")
-    public ResponseEntity<List<SongResultDto>> search(@RequestBody SearchForm searchForm) throws IOException, ParseException, SpotifyWebApiException {
-        SearchResult execute = spotifyApi.searchItem(searchForm.getKeyword(), "track")
+    public ResponseEntity<List<SongResultDto>> search(@RequestParam String keyword) throws IOException, ParseException, SpotifyWebApiException {
+        SearchResult execute = spotifyApi.searchItem(keyword, "track")
                 .limit(10)
                 .build()
                 .execute();
