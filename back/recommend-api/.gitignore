@@ -3,3 +3,5 @@ recommendation/models/
 recommendation/datasets/
 *.pyc
 recommendation/__pycache__/
+
+venv
