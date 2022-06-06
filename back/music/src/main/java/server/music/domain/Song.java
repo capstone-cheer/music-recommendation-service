@@ -24,4 +24,6 @@ public class Song {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artist_id")
 	private Artist artist; //대표아티스트 한명 또는 그룹 하나
+
+	private String albumTitle; //앨범 제목
 }

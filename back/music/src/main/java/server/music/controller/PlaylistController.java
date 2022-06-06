@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,9 +36,9 @@ public class PlaylistController {
 		String name = playlistForm.getName();
 		Long playlistId = playlistService.createPlaylist(member, name);
 		return new PlaylistThumbnail(
-			playlistId,
-			playlistForm.getName(),
-			Default.THUMBNAIL
+				playlistId,
+				playlistForm.getName(),
+				Default.THUMBNAIL
 		);
 	}
 
@@ -59,11 +60,23 @@ public class PlaylistController {
 		List<Playlist> userPlaylists = playlistService.findAllUserPlaylist(memberId);
 		for (Playlist userPlaylist : userPlaylists) {
 			playlists.add(new PlaylistThumbnail(
-				userPlaylist.getId(),
-				userPlaylist.getName(),
-				userPlaylist.getImageUrl()
+					userPlaylist.getId(),
+					userPlaylist.getName(),
+					userPlaylist.getImageUrl()
 			));
 		}
 		return playlists;
+	}
+
+	@GetMapping("/playlist/{member_id}/{playlist_id}")
+	public ResponseEntity<List<SongDto>> getSongsInPlaylist(
+			@PathVariable("member_id") Long memberId,
+			@PathVariable("playlist_id") Long playlistId) {
+		try {
+			List<SongDto> songList = playlistService.getSongList(memberId, playlistId);
+			return ResponseEntity.ok(songList);
+		} catch (IllegalStateException e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }
