@@ -44,6 +44,18 @@ public class MemberController {
 			.collect(Collectors.toList());
 	}
 
-	// @PostMapping("/login")
-	// public
+	@PostMapping("/login")
+	@ResponseStatus(HttpStatus.OK)
+	public String login(@RequestBody MemberForm form) {
+		Member member = new Member();
+		member.setLoginId(form.getLoginId());
+		member.setPassword(form.getPassword());
+
+		try {
+			memberService.login(member);
+		} catch (IllegalArgumentException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
+		return "로그인 완료";
+	}
 }
