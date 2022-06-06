@@ -69,11 +69,11 @@ public class PlaylistController {
 	}
 
 	@GetMapping("/playlist/{member_id}/{playlist_id}")
-	public ResponseEntity<List<SongDto>> getSongsInPlaylist(
+	public ResponseEntity<List<SongResultDto>> getSongsInPlaylist(
 			@PathVariable("member_id") Long memberId,
 			@PathVariable("playlist_id") Long playlistId) {
 		try {
-			List<SongDto> songList = playlistService.getSongList(memberId, playlistId);
+			List<SongResultDto> songList = playlistService.getSongList(memberId, playlistId);
 			return ResponseEntity.ok(songList);
 		} catch (IllegalStateException e) {
 			return ResponseEntity.badRequest().build();
