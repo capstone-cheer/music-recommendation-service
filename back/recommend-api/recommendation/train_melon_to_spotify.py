@@ -3,7 +3,7 @@ import json
 
 #change 숫자
 # File_no = 21 건너뜀
-FILE_NO = 26 # 항상 완료된 FILE_NO가 적혀있도록 유지하자. 작업을 시작할 때 FILE_NO의 값을 바꾸면서 시작하도록 하자.
+FILE_NO = 21 # 항상 완료된 FILE_NO가 적혀있도록 유지하자. 작업을 시작할 때 FILE_NO의 값을 바꾸면서 시작하도록 하자.
 MAPPING_FILE_NAME = "./mapping_table/melon_to_spotify{0}.json".format(FILE_NO)
 
 # start = 0

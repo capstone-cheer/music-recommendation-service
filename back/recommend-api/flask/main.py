@@ -3,7 +3,7 @@ import json
 import recommendation.recommendManager as recommendManager
 
 app = Flask(__name__)
-test_genre = 'idol'
+test_genre = 'asd'
 
 
 # recommend/playlist
