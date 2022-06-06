@@ -53,4 +53,41 @@ public class RecommendationService {
 		}
 		return ret;
 	}
+
+	public List<SongResultDto> getSongListFromFlaskPlaylist(List<String> songIdList) {
+		List<SongResultDto> ret = new ArrayList<>();
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		String targetUrl = "http://127.0.0.1:5000/recommend/song";
+		JSONObject requestBody = new JSONObject();
+		requestBody.put("song_id_list", songIdList);
+		FlaskPlaylistDto flaskPlaylistDto = restTemplate.postForObject(targetUrl, requestBody, FlaskPlaylistDto.class);
+
+		//이제 받아서 song ID list로 song id, name, albumname, artist name 뽑아서 SongResultDto로 만들어서 클라이언트에 리턴
+		List<String> resultSongList = flaskPlaylistDto.getSongIdList();
+		StringBuilder sb = new StringBuilder();
+		for (String spotifySongId : resultSongList) {
+			if (spotifySongId.length() > 7) { //스포티파이 아이디
+				sb.append(spotifySongId + ",");
+			}
+		}
+		String substring = sb.substring(0, sb.length() - 1);
+		System.out.println("substring = " + substring);
+		try {
+			Track[] execute = spotifyApi.getSeveralTracks(substring).build().execute();
+			for (Track track : execute) {
+				ret.add(new SongResultDto(
+						track.getId(),
+						track.getName(),
+						track.getAlbum().getName(),
+						track.getArtists()[0].getName() //일단 한명만
+				));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
+
+	}
 }

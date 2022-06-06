@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import server.music.controller.SongDto;
+import server.music.controller.SongResultDto;
 import server.music.domain.Member;
 import server.music.domain.Playlist;
 import server.music.domain.PlaylistSong;
@@ -61,16 +61,16 @@ public class PlaylistService {
 		return playlistRepository.findAllUserPlaylist(member);
 	}
 
-	public List<SongDto> getSongList(Long memberId, Long playlistId) throws IllegalStateException {
+	public List<SongResultDto> getSongList(Long memberId, Long playlistId) throws IllegalStateException {
 		Playlist one = validatePlaylistId(memberId, playlistId);
 		if (one == null) {
 			throw new IllegalStateException("존재하지 않는 플레이리스트 입니다.");
 		}
 		List<PlaylistSong> playlistSongs = one.getPlaylistSongs();
-		List<SongDto> ret = new ArrayList<>();
+		List<SongResultDto> ret = new ArrayList<>();
 		for (PlaylistSong playlistSong : playlistSongs) {
 			Song song = playlistSong.getSong();
-			ret.add(new SongDto(
+			ret.add(new SongResultDto(
 					song.getSongCode(),
 					song.getTitle(),
 					song.getAlbumTitle(),
