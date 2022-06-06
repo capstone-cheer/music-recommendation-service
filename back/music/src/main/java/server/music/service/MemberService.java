@@ -40,4 +40,14 @@ public class MemberService {
 	public Member findOne(Long memberId) {
 		return memberRepository.findOne(memberId);
 	}
+
+	public void login(Member member) {
+		Member found = memberRepository.findOne(member.getId());
+		if (found == null) {
+			throw new IllegalArgumentException("존재하지 않는 회원입니다.");
+		}
+		if (!found.getPassword().equals(member.getPassword())) {
+			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+		}
+	}
 }
