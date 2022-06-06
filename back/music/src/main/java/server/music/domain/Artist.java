@@ -17,8 +17,8 @@ import lombok.Getter;
 @Table(name = "artist")
 public class Artist {
 
-	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-	List<Song> songList = new ArrayList<>();
+	// @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+	// List<Song> songList = new ArrayList<>();
 	@Id
 	@Column(name = "artist_id")
 	private String id;

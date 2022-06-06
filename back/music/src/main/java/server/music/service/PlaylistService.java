@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import se.michaelthelin.spotify.SpotifyApi;
+import se.michaelthelin.spotify.model_objects.specification.Track;
 import server.music.controller.SongResultDto;
 import server.music.domain.Member;
 import server.music.domain.Playlist;
@@ -24,6 +26,7 @@ public class PlaylistService {
 	private final PlaylistRepository playlistRepository;
 	private final MemberRepository memberRepository;
 	private final SongRepository songRepository;
+	private final SpotifyApi spotifyApi;
 
 	/**
 	 * 플레이리스트 생성
@@ -38,13 +41,23 @@ public class PlaylistService {
 	 * 플레이리스트에 음악 추가
 	 */
 	@Transactional
-	public void addSongs(Long playlistId, List<String> songCodeList) throws IllegalStateException {
+	public void addSongs(Long playlistId, List<String> songCodeList) throws Exception {
 		Playlist findPlaylist = playlistRepository.findOne(playlistId);
 		if (findPlaylist == null) {
 			throw new IllegalStateException("존재하지 않는 플레이리스트");
 		}
 		for (String songCode : songCodeList) {
 			Song findSong = songRepository.findOne(songCode);
+			if (findSong == null) {
+				Track track = spotifyApi.getTrack(songCode).build().execute();
+				findSong = songRepository.save(new Song(
+						track.getId(),
+						track.getName(),
+						track.getAlbum().getImages()[0].getUrl(),
+						track.getArtists()[0].getName(),
+						track.getAlbum().getName()
+				));
+			}
 			PlaylistSong playlistSong = PlaylistSong.createPlaylistSong(
 					findPlaylist,
 					findSong
@@ -74,7 +87,7 @@ public class PlaylistService {
 					song.getSongCode(),
 					song.getTitle(),
 					song.getAlbumTitle(),
-					song.getArtist().getName()
+					song.getArtist()
 			));
 		}
 		return ret;
