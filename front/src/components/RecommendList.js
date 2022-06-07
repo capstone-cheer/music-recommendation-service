@@ -4,6 +4,7 @@ import "../css/RecommendList.css";
 import TrackCategory from "./TrackCategory";
 import TrackInfo from "./TrackInfo";
 import RecommendSettingPopup from "./RecommendSettingPopup";
+import axios from "axios";
 
 const playlist = {
     'id':'1',
@@ -35,6 +36,19 @@ const categorySetting = [
 
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
+    const [recommendSources, setRecommendSources] = useState(null);
+    const [recommendItems, setRecommendItems] = useState(null);
+
+    const getPlaylistItems = async () => {
+        await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
+        .then(function (res) {
+            setRecommendSources(res.data);
+        })
+    }
+
+    useEffect(() => {
+        getPlaylistItems();
+    }, [])
 
 
     const openRecommendSetting = () => {
