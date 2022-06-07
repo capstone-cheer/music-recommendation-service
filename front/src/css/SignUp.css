@@ -1,25 +1,128 @@
-.SignUp {
+.sign__up__form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height: 100vh;
     justify-content: center;
-    padding-top: 20%;
+    background-color: black;
 }
 
-.SignUpContainer {
+.sign__up__container {
     display: flex;
     padding: 5%;
     flex-grow: 1;
     flex-direction: column;
     border: solid 1px;
-    max-width: 30%;
+    width: 50vw;
+    max-width: 300px;
+    height: 25vh;
+    max-height: 160px;
+    border-radius: 50px;
+    background-color: #151515;
 }
 
-.SignUpContainer > input {
-    font-size: 15px;
-    line-height: 30px;
+.sigin__up__input__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #2d2d2d;
 }
 
-.SignUpContainer > button {
+.sign__up__id__input__container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.sign__up__id__input__icon {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign__up__id__input {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sign__up__id__input > input {
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.sign__up__password__input__container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.sign__up__password__input__icon {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign__up__password__input {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sign__up__password__input > input {
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.sign__up__password__check__container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.sign__up__password__check__icon {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign__up__password__check {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sign__up__password__check > input {
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.sign__up__submit__button {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign__up__submit__button > button {
     font-size: 15px;
     line-height: 30px;
-    background-color: antiquewhite;
+    background-color: #cccccc;
+    font-weight: bold;
+    border: 0;
+}
+
+.sign__up__submit__button > button:hover {
+    background-color: #1db954;
 }
