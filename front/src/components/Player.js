@@ -38,12 +38,14 @@ function Player(props) {
         {'id':'7', 'title':'werwerasd', 'artist':'qxcvnswe', 'album':'123', 'spotify_id': '0d8anwJJGti8jE79Y4tXUD'},
     ]
     const globalVar = useContext(AppContext);
+    
 
-    console.log('Player Render')
 
-    const submitTestBtn = () => {
-        setUriList((uriList) => makeTrackUriList(testTracks))
-    }
+    console.log('Player Render', globalVar.selectedPlaylist)
+
+    useEffect(() => {
+        console.log('플레이어', globalVar.playingTrackList)
+    },[globalVar.playingTrackList])
     
     return (
         <div className="player">
@@ -52,9 +54,9 @@ function Player(props) {
                     <SpotifyPlayer
                         token={Cookies.get('spotifyAuthToken')}
                         styles={sdkStyle}
-                        uris={uriList}
+                        uris={globalVar.playingTrackList}
+                        autoPlay={true}
                     />
-                    <button onClick={submitTestBtn}>asd</button>
                 </div>
                 
             ):(

@@ -9,24 +9,25 @@ import axios from "axios";
 // Container > TrackContainer
 function TrackContainer(props) {
     const globalVar = useContext(AppContext);
-    //const [playlistItems, setPlaylistItems] = useState(null);
 
-    const submitPlaylistToPlay = (value) => {
-        console.log(value);
-    }
-/*
-    const getPlaylistItems = async () => {
-        await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
-        .then(function (res) {
-            setPlaylistItems(res.data);
+    const submitPlaylistToPlay = () => {
+        const tmpPlayTrackList = [];
+        props.playlistItems && props.playlistItems.map((track, index) => {
+            tmpPlayTrackList.push('spotify:track:'+track.id);
         })
+        globalVar.changePlayingTrackList(tmpPlayTrackList)
     }
 
-    useEffect(() => {
-        getPlaylistItems();
-    }, [globalVar.selectedPlaylist])
-    */
-    // 서버에 playlist id값으로 트랙 리스트 fetch
+    const submitTrackFromItem = (value) => {
+        const tmpPlayTrackList = [];
+        props.playlistItems && props.playlistItems.map((track, index) => {
+            if (index >= value) {
+                tmpPlayTrackList.push('spotify:track:'+track.id);
+            }
+        })
+        globalVar.changePlayingTrackList(tmpPlayTrackList)
+    }
+
     return(
         <div className="track__container">
             <div className="playlist__info">
@@ -47,7 +48,7 @@ function TrackContainer(props) {
                 </div>
                 <div className="track__list">
                     {props.playlistItems && props.playlistItems.map((track, index) => (
-                        <TrackInfo track={track} order={index+1}/>
+                        <TrackInfo track={track} order={index+1} submitTrackFromItem={submitTrackFromItem} />
                     ))}
                 </div>    
             </div>

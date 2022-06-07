@@ -27,7 +27,7 @@ function SearchResultTrack(props) {
     const [isMouseOver, setIsMouseOver] = useState(0);
 
     const submitTrackToPlay = (value) => {
-        console.log(value);
+        props.submitTrackFromItem(value);
     }
 
     const addTrackToPlaylist = async () => {
@@ -50,12 +50,12 @@ function SearchResultTrack(props) {
                 {isMouseOver ?
                     <div className="search__result__track__play__button">
                         <button onClick={ () => {
-                            submitTrackToPlay(props.track.id)
+                            submitTrackToPlay(props.order)
                         }}>
                             <IoPlayCircle className="search__result__track__play__circle" size='50' color="#1db954" />
                         </button>
                     </div>
-                    : <img src="https://i.scdn.co/image/ab67616d00001e027359994525d219f64872d3b1" 
+                    : <img src={props.track.imageUrl} 
                             className="search__result__track__cover" 
                             alt="cover"
                 />
@@ -85,6 +85,17 @@ function SearchView(props) {
     const globalVar = useContext(AppContext);
     const [ searchViewTrack, setSearchViewTrack ] = useState(globalVar.searchResponse);
 
+    const submitTrackFromItem = (value) => {
+        console.log('submit from track', value)
+        const tmpPlayTrackList = [];
+        searchViewTrack && searchViewTrack.map((track, index) => {
+            if (index >= value) {
+                tmpPlayTrackList.push('spotify:track:'+track.id);
+            }
+        })
+        globalVar.changePlayingTrackList(tmpPlayTrackList)
+    }
+
     const getSearchOutput = async () => {
         await axios.get("/search?keyword="+props.searchRequest)
         .then(function (res) {
@@ -94,7 +105,7 @@ function SearchView(props) {
 
     useEffect(() => {
         getSearchOutput();
-    }, [])
+    }, [props.searchRequest])
 
     return (
         <div className="search__view">
@@ -109,7 +120,7 @@ function SearchView(props) {
             <ul>
                 {searchViewTrack && searchViewTrack.map((track, index) => (
                     <li key={index}>
-                        <SearchResultTrack track={track} />
+                        <SearchResultTrack track={track} submitTrackFromItem={submitTrackFromItem} order={index}/>
                     </li>
                 ))}
             </ul>

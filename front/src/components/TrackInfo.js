@@ -6,8 +6,7 @@ function TrackInfo(props) {
     const [isMouseOver, setIsMouseOver] = useState(0);
 
     const submitTrackToPlay = (value) => {
-        console.log(value);
-        console.log(props.track);
+        props.submitTrackFromItem(value);
     }
 
     return(
@@ -19,7 +18,7 @@ function TrackInfo(props) {
             {isMouseOver ?
                 <div className="track__info__play__button">
                     <button onClick={ () => {
-                        submitTrackToPlay(props.track.id)
+                        submitTrackToPlay(props.order-1)
                     }}>
                         <IoPlayCircle className="track__info__play__circle" size='50' color="#1db954" />
                     </button>
