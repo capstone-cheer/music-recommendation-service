@@ -35,4 +35,8 @@ public class Song {
 		this.artist = artist;
 		this.albumTitle = albumTitle;
 	}
+
+	public Song() {
+
+	}
 }

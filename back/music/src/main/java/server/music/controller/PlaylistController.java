@@ -47,8 +47,8 @@ public class PlaylistController {
 	 */
 	@PostMapping("/playlists/{playlist_id}/add")
 	public ResponseEntity<String> addSongs(@PathVariable("playlist_id") Long playlistId,
-			@RequestBody SongCodeDto songCodeDto) {
-		List<String> songCodeList = songCodeDto.getSongCodeList();
+			@RequestBody SongIdListForm songCodeDto) {
+		List<String> songCodeList = songCodeDto.getSongIdList();
 		try {
 			playlistService.addSongs(playlistId, songCodeList);
 			return ResponseEntity.ok("success");
@@ -74,7 +74,7 @@ public class PlaylistController {
 		return playlists;
 	}
 
-	@GetMapping("/playlist/{member_id}/{playlist_id}")
+	@GetMapping("/playlists/{member_id}/{playlist_id}")
 	public ResponseEntity<List<SongResultDto>> getSongsInPlaylist(
 			@PathVariable("member_id") Long memberId,
 			@PathVariable("playlist_id") Long playlistId) {

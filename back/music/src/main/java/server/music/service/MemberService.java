@@ -45,11 +45,12 @@ public class MemberService {
 	}
 
 	public void login(Member member) {
-		Member found = memberRepository.findOne(member.getId());
-		if (found == null) {
+		List<Member> members = memberRepository.findByLoginID(member.getLoginId());
+		if (members.isEmpty()) {
 			throw new IllegalArgumentException("존재하지 않는 회원입니다.");
 		}
-		if (!found.getPassword().equals(member.getPassword())) {
+		if (!members.get(0).getPassword()
+				.equals(member.getPassword())) {
 			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
 		}
 	}
