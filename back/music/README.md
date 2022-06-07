@@ -361,7 +361,11 @@ success
 
 ```json
 {
-  "songId": "3P3UA61WRQqwCXaoFOTENd"
+  "songId": "3P3UA61WRQqwCXaoFOTENd",
+  "category": [
+    "danceability",
+    "tempo"
+  ]
 }
 ```
 
@@ -371,6 +375,7 @@ success
   `name=[String] - 노래 제목`
   `albumName=[String] - 앨범 제목`
   `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 앨범커버url`
 
 * **Success Response:**
 ```json
@@ -424,6 +429,10 @@ success
     "1VnjByC7TUx5A73A4qtgoo",
     "2GBrW5lRWjAQMhK612qzVg",
     "4eFTh1opLS5wANDmZK9ghC"
+  ],
+  "category": [
+    "danceability",
+    "tempo"
   ]
 }
 ```
@@ -434,6 +443,7 @@ success
   `name=[String] - 노래 제목`
   `albumName=[String] - 앨범 제목`
   `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 앨범커버url`
 
 * **Success Response:**
 ```json
@@ -442,19 +452,22 @@ success
         "id": "4UCkX8nrBlpxjrrEqtb46a",
         "name": "Apache",
         "albumName": "8th Wonder",
-        "artistName": "The Sugarhill Gang"
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
     },
     {
         "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
         "name": "Ping Pong",
         "albumName": "Collected Recordings",
-        "artistName": "Gareth Dickson"
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
     },
     {
         "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
         "name": "Ping Pong",
         "albumName": "Collected Recordings",
-        "artistName": "Gareth Dickson"
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
     }
 ]
 ```
@@ -464,14 +477,11 @@ success
 </details>
 
 <details markdown="1">
-<summary>추천 API</summary>
-
-<details markdown="1" style="margin-left:14px">
-<summary>노래 하나로 추천</summary>
+<summary>검색</summary>
 
 * **URL**
 
-  /seach?keyword={}
+  /search?keyword={}
 
 * **Method:**
 
@@ -517,8 +527,6 @@ none
     }
 ]
 ```
-
-</details>
 
 </details>
 
