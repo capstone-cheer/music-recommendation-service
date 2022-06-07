@@ -1,7 +1,9 @@
 .track__info {
+    color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 55vw;
     border-bottom: 2px solid #1b1b1b;
 }
 
@@ -45,25 +47,47 @@
 }
 
 .track__detail {
-    color: white;
     display: flex;
     flex-grow: 1;
+    flex-shrink: 0;
     height: 40px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .album__title__box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 100px;
+}
+
+.title__info {
     overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 25vw;
+}
+
+.album__info {
+    color: #999999;
+    font-size: 12px;
+}
+
+.album__info:hover {
+    color: black;
+
 }
 
 .artist__box {
+    flex-shrink: 0;
     padding: 0px;
     overflow: hidden;
+    font-size: 14px;
+    max-width: 20vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
