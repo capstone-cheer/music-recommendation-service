@@ -15,8 +15,9 @@ public class SongRepository {
 
 	private final EntityManager em;
 
-	public void save(Song song) {
+	public Song save(Song song) {
 		em.persist(song);
+		return song;
 	}
 
 	public Song findOne(String id) {

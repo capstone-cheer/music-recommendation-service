@@ -1,6 +1,5 @@
 package server.music.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -18,14 +17,16 @@ public class RecommendationController {
 	private final RecommendationService recommendationService;
 
 	@PostMapping("/recommend/song")
-	public ResponseEntity<List<SongResultDto>> recommendSongsBySong(@RequestBody SongForm song){
+	public ResponseEntity<List<SongResultDto>> recommendSongsBySong(@RequestBody SongForm song) {
 		String songId = song.getSongId();
 		List<SongResultDto> songList = recommendationService.getSongListFromFlask(songId);
 		return ResponseEntity.ok(songList);
 	}
 
 	@PostMapping("/recommend/playlist")
-	public void recommendSongsByPlaylist(){
-
+	public ResponseEntity<List<SongResultDto>> recommendSongsByPlaylist(@RequestBody SongIdListForm form) {
+		List<String> songIdList = form.getSongIdList();
+		List<SongResultDto> songList = recommendationService.getSongListFromFlaskPlaylist(songIdList);
+		return ResponseEntity.ok(songList);
 	}
 }

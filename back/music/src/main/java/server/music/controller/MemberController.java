@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +45,17 @@ public class MemberController {
 			.collect(Collectors.toList());
 	}
 
-	// @PostMapping("/login")
-	// public
+	@PostMapping("/login")
+	public ResponseEntity<String> login(@RequestBody MemberForm form) {
+		Member member = new Member();
+		member.setLoginId(form.getLoginId());
+		member.setPassword(form.getPassword());
+
+		try {
+			memberService.login(member);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok("로그인 완료");
+	}
 }
