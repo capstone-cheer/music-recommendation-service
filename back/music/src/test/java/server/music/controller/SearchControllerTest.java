@@ -25,18 +25,18 @@ class SearchControllerTest {
     @MockBean
     private SearchController searchController;
 
-    @Test
-    public void SpotifyApi_Bean_등록()throws Exception{
-        //given
-        SearchForm searchForm = new SearchForm();
-        searchForm.setKeyword("s");
-        //when
-        ResultActions result = mockMvc.perform(get("/search")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(searchForm)));
-        //then
-        MvcResult mvcResult = result.andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-        System.out.println("contentAsString = " + contentAsString);
-    }
+    // @Test
+    // public void SpotifyApi_Bean_등록()throws Exception{
+    //     //given
+    //     SearchForm searchForm = new SearchForm();
+    //     searchForm.setKeyword("s");
+    //     //when
+    //     ResultActions result = mockMvc.perform(get("/search")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(objectMapper.writeValueAsString(searchForm)));
+    //     //then
+    //     MvcResult mvcResult = result.andReturn();
+    //     String contentAsString = mvcResult.getResponse().getContentAsString();
+    //     System.out.println("contentAsString = " + contentAsString);
+    // }
 }

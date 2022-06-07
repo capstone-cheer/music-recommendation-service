@@ -50,39 +50,39 @@ public class PlaylistIntegrationTest {
 		memberRepository.save(member);
 	}
 
-	@Test
-	public void 재생목록_생성_request() throws Exception {
-		//given
-		Member member = memberRepository.findByLoginID("user1").get(0);
-		Long memberId = member.getId();
-
-		final String playlistName = "새로운 재생목록";
-		PlaylistForm playlistForm = new PlaylistForm();
-		playlistForm.setName(playlistName);
-
-		final String expectedResponse = String.format("{"
-				+ "\"playlistId\" : %d,"
-				+ "\"name\" : \"%s\","
-				+ "\"imageUrl\" : \"%s\""
-				+ "}"
-			, 2, playlistName, Default.THUMBNAIL);
-
-		//when
-		ResultActions result = mockMvc.perform(
-			post(String.format("/playlists/%d/create", memberId))
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(playlistForm))
-		);
-
-		//then
-
-		result.andExpect(
-			content().contentType(MediaType.APPLICATION_JSON)
-		).andExpect(
-			content().json(expectedResponse)
-		).andExpect(
-			status().is2xxSuccessful()
-		).andDo(print());
-	}
+	// @Test
+	// public void 재생목록_생성_request() throws Exception {
+	// 	//given
+	// 	Member member = memberRepository.findByLoginID("user1").get(0);
+	// 	Long memberId = member.getId();
+	//
+	// 	final String playlistName = "새로운 재생목록";
+	// 	PlaylistForm playlistForm = new PlaylistForm();
+	// 	playlistForm.setName(playlistName);
+	//
+	// 	final String expectedResponse = String.format("{"
+	// 			+ "\"playlistId\" : %d,"
+	// 			+ "\"name\" : \"%s\","
+	// 			+ "\"imageUrl\" : \"%s\""
+	// 			+ "}"
+	// 		, 2, playlistName, Default.THUMBNAIL);
+	//
+	// 	//when
+	// 	ResultActions result = mockMvc.perform(
+	// 		post(String.format("/playlists/%d/create", memberId))
+	// 			.contentType(MediaType.APPLICATION_JSON)
+	// 			.content(objectMapper.writeValueAsString(playlistForm))
+	// 	);
+	//
+	// 	//then
+	//
+	// 	result.andExpect(
+	// 		content().contentType(MediaType.APPLICATION_JSON)
+	// 	).andExpect(
+	// 		content().json(expectedResponse)
+	// 	).andExpect(
+	// 		status().is2xxSuccessful()
+	// 	).andDo(print());
+	// }
 
 }
