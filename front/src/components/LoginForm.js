@@ -21,14 +21,12 @@ function LoginForm(props) {
             password: password
         }).then(function (res) {
             console.log(res)
-            sessionStorage.setItem('member_id', res.data.member_id);
+            sessionStorage.setItem('member_id', "1");//res.data.member_id);
+            sessionStorage.setItem('user_id', loginId);
             window.location.replace("/");
         }).catch(function (error) {
             console.log('err', error);
             alert('잘못된 아이디 또는 비밀번호입니다.')
-
-            sessionStorage.setItem('member_id', "1");
-            window.location.replace("/");
         });
     }
 
