@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import "../css/RecommendList.css";
 import TrackCategory from "./TrackCategory";
 import TrackInfo from "./TrackInfo";
+import AppContext from "./AppContext";
 import RecommendSettingPopup from "./RecommendSettingPopup";
 import axios from "axios";
 
@@ -37,17 +38,39 @@ const categorySetting = [
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
     const [recommendSources, setRecommendSources] = useState(null);
+    const [songIdList, setSongIdList] = useState(null);
     const [recommendItems, setRecommendItems] = useState(null);
 
+    const globalVar = useContext(AppContext);
+
+    const tmpSongIdList = [];
     const getPlaylistItems = async () => {
         await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
         .then(function (res) {
             setRecommendSources(res.data);
+            res.data && res.data.map((track, index) => {
+                tmpSongIdList.push(track.id);
+                console.log(track.id);
+            })
+            setSongIdList(() => tmpSongIdList);
         })
     }
+    
+
+    /*
+    const getRecommendItems = async () => {
+        await axios.post("/recommend/playlist", {
+            "songIdList":[],
+            "category": [
+                "danceability",
+                "tempo"
+            ]
+        })
+    }*/
 
     useEffect(() => {
         getPlaylistItems();
+        console.log(songIdList)
     }, [])
 
 
