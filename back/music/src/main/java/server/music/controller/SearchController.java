@@ -37,7 +37,8 @@ public class SearchController {
                     item.getId(),
                     item.getName(),
                     item.getAlbum().getName(),
-                    item.getArtists()[0].getName()
+                    item.getArtists()[0].getName(),
+                    item.getAlbum().getImages()[0].getUrl()
             ));
         }
         return ResponseEntity.ok(songResultDtos);

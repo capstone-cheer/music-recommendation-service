@@ -12,4 +12,5 @@ public class SongResultDto {
     private String name;
     private String albumName;
     private String artistName;
+    private String imageUrl;
 }

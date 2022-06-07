@@ -311,25 +311,29 @@ success
         "id": "3P3UA61WRQqwCXaoFOTENd",
         "name": "Through the Night",
         "albumName": "Palette",
-        "artistName": "IU"
+        "artistName": "IU",
+        "imageUrl": ""
     },
     {
         "id": "1VnjByC7TUx5A73A4qtgoo",
         "name": "우산 (feat. 윤하)",
         "albumName": "Pieces, Part One",
-        "artistName": "Epik High"
+        "artistName": "Epik High",
+        "imageUrl": ""
     },
     {
         "id": "2GBrW5lRWjAQMhK612qzVg",
         "name": "The End",
         "albumName": "One Strange Night",
-        "artistName": "Kwon Jin Ah"
+        "artistName": "Kwon Jin Ah",
+        "imageUrl": ""
     },
     {
         "id": "4eFTh1opLS5wANDmZK9ghC",
         "name": "Cherry Blossom Ending",
         "albumName": "Busker Busker 1st",
-        "artistName": "Busker Busker"
+        "artistName": "Busker Busker",
+        "imageUrl": ""
     }
 ]
 ```
@@ -375,19 +379,22 @@ success
         "id": "4UCkX8nrBlpxjrrEqtb46a",
         "name": "Apache",
         "albumName": "8th Wonder",
-        "artistName": "The Sugarhill Gang"
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
     },
     {
         "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
         "name": "Ping Pong",
         "albumName": "Collected Recordings",
-        "artistName": "Gareth Dickson"
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
     },
     {
         "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
         "name": "Ping Pong",
         "albumName": "Collected Recordings",
-        "artistName": "Gareth Dickson"
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
     }
 ]
 ```
@@ -448,6 +455,65 @@ success
         "name": "Ping Pong",
         "albumName": "Collected Recordings",
         "artistName": "Gareth Dickson"
+    }
+]
+```
+
+</details>
+
+</details>
+
+<details markdown="1">
+<summary>추천 API</summary>
+
+<details markdown="1" style="margin-left:14px">
+<summary>노래 하나로 추천</summary>
+
+* **URL**
+
+  /seach?keyword={}
+
+* **Method:**
+
+  `GET`
+
+* **Data Params**
+
+```
+none
+```
+
+* **Response**
+
+  `id=[String] - spotify 음악 id`  
+  `name=[String] - 노래 제목`
+  `albumName=[String] - 앨범 제목`
+  `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 가수 이름`
+
+* **Success Response:**
+```json
+[
+    {
+        "id": "4UCkX8nrBlpxjrrEqtb46a",
+        "name": "Apache",
+        "albumName": "8th Wonder",
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
     }
 ]
 ```

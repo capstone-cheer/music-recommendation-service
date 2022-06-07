@@ -40,7 +40,8 @@ public class RecommendationService {
 						track.getId(),
 						track.getName(),
 						track.getAlbum().getName(),
-						track.getArtists()[0].getName() //일단 한명만
+						track.getArtists()[0].getName(), //일단 한명만
+						track.getAlbum().getImages()[0].getUrl()
 				));
 			}
 		} catch (Exception e) {
@@ -72,7 +73,8 @@ public class RecommendationService {
 						track.getId(),
 						track.getName(),
 						track.getAlbum().getName(),
-						track.getArtists()[0].getName() //일단 한명만
+						track.getArtists()[0].getName(), //일단 한명만
+						track.getAlbum().getImages()[0].getUrl()
 				));
 			}
 		} catch (Exception e) {

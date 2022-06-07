@@ -104,7 +104,8 @@ public class PlaylistService {
 					song.getSongCode(),
 					song.getTitle(),
 					song.getAlbumTitle(),
-					song.getArtist()
+					song.getArtist(),
+					song.getImageUrl()
 			));
 		}
 		return ret;
