@@ -12,6 +12,7 @@ function Sidebar(props) {
 
     const selectPlaylist = (playlist, index) => {
         globalVar.changeSelectedPlaylist(playlist);
+        console.log(playlist)
         globalVar.changeSearchRequest(null);
     }
 
@@ -29,7 +30,7 @@ function Sidebar(props) {
     return (
         <div className="sidebar">
             <div className="sidebar__title">PLAYLISTS</div>
-            <button className="add__new__playlist" onClick={openAddPlaylistPopup}>
+            <button className="add__new__playlist" onClick={ () => {openAddPlaylistPopup()}}>
                 <BsFillPlusCircleFill className="playlist__add__button" size={20} color="#1db954"/>
                 <div className="add__button__text">
                     <p>New Playlist</p>

@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
+import AppContext from "./AppContext";
 import "../css/PlaylistAddPopup.css"
 
 function PlaylistAddPopup(props) {
     const [inputPlaylistName, setInputPlaylistName] = useState('');
+    const globalVar = useContext(AppContext)
+
     const handleInputPlaylistName = (e) => {
         setInputPlaylistName(e.target.value);
     }
@@ -14,7 +17,7 @@ function PlaylistAddPopup(props) {
             member_id: sessionStorage.getItem('member_id'),
             name: inputPlaylistName
         }).then(function (res) {
-            console.log(res)
+            globalVar.changeSelectedPlaylist(res.data);
         })
     }
 

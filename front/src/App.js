@@ -28,7 +28,6 @@ function App() {
   }
   const changeSetSearchResponse = (value) => {
     setSearchResponse(value)
-    console.log('global search res', value)
   }
 
 

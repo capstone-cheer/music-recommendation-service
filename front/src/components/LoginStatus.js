@@ -7,6 +7,7 @@ import axios from "axios";
 
 function LoginStatus(props) {
     const [SpotifyAuthToken, setSpotifyAuthToken] = useState();
+    const [userId, setUserId] = useState();
     const [spotifyId, setSpotifyId] = useState();
     const config = require('../config.json');
 
@@ -25,10 +26,11 @@ function LoginStatus(props) {
 
     useEffect(() => {
         setSpotifyAuthToken(Cookies.get('spotifyAuthToken'))
+        setUserId(sessionStorage.getItem('user_id'));
         if(Cookies.get('spotifyAuthToken')) {
             fetchSpotifyProfile();
         };
-    }, []);
+    }, [sessionStorage.getItem('user_id')]);
 
     const submitLogout = () => {
         sessionStorage.clear();
@@ -46,7 +48,7 @@ function LoginStatus(props) {
                                 <IoPersonCircleOutline size='24' color="white" />
                             </div>
                             <div className="local__login__info">
-                                {sessionStorage.getItem('member_id')}
+                                {sessionStorage.getItem('user_id')}
                             </div>
                         </div>
                         <div className="spotify__login__status">
@@ -73,7 +75,7 @@ function LoginStatus(props) {
                                 <IoPersonCircleOutline size='24' color="white" />
                             </div>
                             <div className="local__login__info">
-                                {sessionStorage.getItem('member_id')}
+                                {sessionStorage.getItem('user_id')}
                             </div>
                         </div>
                         <div className="spotify__login__status">

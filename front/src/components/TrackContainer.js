@@ -9,12 +9,12 @@ import axios from "axios";
 // Container > TrackContainer
 function TrackContainer(props) {
     const globalVar = useContext(AppContext);
-    const [playlistItems, setPlaylistItems] = useState(null);
+    //const [playlistItems, setPlaylistItems] = useState(null);
 
     const submitPlaylistToPlay = (value) => {
         console.log(value);
     }
-
+/*
     const getPlaylistItems = async () => {
         await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
         .then(function (res) {
@@ -24,8 +24,8 @@ function TrackContainer(props) {
 
     useEffect(() => {
         getPlaylistItems();
-    }, [])
-
+    }, [globalVar.selectedPlaylist])
+    */
     // 서버에 playlist id값으로 트랙 리스트 fetch
     return(
         <div className="track__container">
@@ -46,7 +46,7 @@ function TrackContainer(props) {
                     <TrackCategory />
                 </div>
                 <div className="track__list">
-                    {playlistItems && playlistItems.map((track, index) => (
+                    {props.playlistItems && props.playlistItems.map((track, index) => (
                         <TrackInfo track={track} order={index+1}/>
                     ))}
                 </div>    

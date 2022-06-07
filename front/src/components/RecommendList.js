@@ -7,27 +7,6 @@ import AppContext from "./AppContext";
 import RecommendSettingPopup from "./RecommendSettingPopup";
 import axios from "axios";
 
-const playlist = {
-    'id':'1',
-    'name':'',
-    'tracks': [
-        {'id':'1', 'title':'title1', 'artist':'qasdf234we', 'album':'123'},
-        {'id':'2', 'title':'asdqwr', 'artist':'qqwewe', 'album':'123'},
-        {'id':'3', 'title':'asdasxcb', 'artist':'qwerwe', 'album':'123'},
-        {'id':'4', 'title':'asqwzxd', 'artist':'qasdfwe', 'album':'123'},
-        {'id':'5', 'title':'asfagrfhtgykd', 'artist':'asdfzxcqwe', 'album':'123'},
-        {'id':'6', 'title':'asert2d', 'artist':'qwetwewe', 'album':'123'},
-        {'id':'7', 'title':'werwerasd', 'artist':'qxcvnswe', 'album':'123'},
-        {'id':'8', 'title':'xcvbasd', 'artist':'qwdfgjde', 'album':'123'},
-        {'id':'9', 'title':'asdghasd', 'artist':'qertewwe', 'album':'123'},
-        {'id':'10', 'title':'qweasdasd', 'artist':'sdfgsqwe', 'album':'123'},
-        {'id':'11', 'title':'asgdxcbasd', 'artist':'qsdfhcvwe', 'album':'123'},
-        {'id':'12', 'title':'dafydryasd', 'artist':'qxcvbwwe', 'album':'123'},
-        {'id':'13', 'title':'xcvbasd', 'artist':'qweasfqwe', 'album':'123'},
-        {'id':'14', 'title':'werqasd', 'artist':'ngdfqwe', 'album':'123'},
-    ]
-}
-
 const categorySetting = [
     { 'id':'1', 'category_name' : 'cate1', 'isChecked': true },
     { 'id':'2', 'category_name' : 'cate2', 'isChecked': false },
@@ -37,41 +16,42 @@ const categorySetting = [
 
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
-    const [recommendSources, setRecommendSources] = useState(null);
     const [songIdList, setSongIdList] = useState(null);
     const [recommendItems, setRecommendItems] = useState(null);
 
     const globalVar = useContext(AppContext);
 
-    const tmpSongIdList = [];
-    const getPlaylistItems = async () => {
-        await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
-        .then(function (res) {
-            setRecommendSources(res.data);
-            res.data && res.data.map((track, index) => {
-                tmpSongIdList.push(track.id);
-                console.log(track.id);
-            })
-            setSongIdList(() => tmpSongIdList);
+    const makeSongIdList = () => {
+        const tmpSongIdList = [];
+        props.playlistItems && props.playlistItems.map((track, index) => {
+            tmpSongIdList.push(track.id);
         })
+        setSongIdList(tmpSongIdList);
     }
     
 
-    /*
-    const getRecommendItems = async () => {
+    const getPlaylistItems = async (value) => {
+        makeSongIdList();
+        console.log('fetch',value)
         await axios.post("/recommend/playlist", {
-            "songIdList":[],
-            "category": [
+            songIdList: value,
+            category : [
                 "danceability",
                 "tempo"
             ]
+        }).then(function (res) {
+            setRecommendItems(() => res.data);
+            console.log(res.data)
         })
-    }*/
+    }
 
     useEffect(() => {
-        getPlaylistItems();
-        console.log(songIdList)
-    }, [])
+        //getPlaylistItems(console.log(songIdList));
+        console.log('songIdList', songIdList)
+        console.log(globalVar.selectedPlaylist)
+        getPlaylistItems(songIdList);
+        
+    }, [globalVar.selectedPlaylist]);
 
 
     const openRecommendSetting = () => {
@@ -101,7 +81,7 @@ function RecommendList(props) {
                     <TrackCategory />
                 </div>
                 <div className="recommend__track__list">
-                    {playlist.tracks && playlist.tracks.map((track, index) => (
+                    {recommendItems && recommendItems.map((track, index) => (
                         <TrackInfo track={track} order={index+1} />
                     ))}
                 </div>    

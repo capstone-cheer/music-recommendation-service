@@ -21,7 +21,8 @@ function LoginForm(props) {
             password: password
         }).then(function (res) {
             console.log(res)
-            sessionStorage.setItem('member_id', "1");//res.data.member_id);
+            sessionStorage.setItem('member_id', res.data.memberId);//res.data.member_id);
+            sessionStorage.setItem('user_id', loginId)
             window.location.replace("/");
         }).catch(function (error) {
             console.log('err', error);
