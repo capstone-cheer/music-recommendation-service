@@ -44,7 +44,7 @@ public class MemberService {
 		return memberRepository.findOne(memberId);
 	}
 
-	public void login(Member member) {
+	public Long login(Member member) {
 		List<Member> members = memberRepository.findByLoginID(member.getLoginId());
 		if (members.isEmpty()) {
 			throw new IllegalArgumentException("존재하지 않는 회원입니다.");
@@ -53,5 +53,6 @@ public class MemberService {
 				.equals(member.getPassword())) {
 			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
 		}
+		return members.get(0).getId();
 	}
 }
