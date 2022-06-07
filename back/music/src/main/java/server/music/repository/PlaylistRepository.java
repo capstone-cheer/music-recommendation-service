@@ -51,4 +51,11 @@ public class PlaylistRepository {
 			.setParameter("member", member)
 			.getResultList();
 	}
+
+	/**
+	 * 플레이리스트 썸네일 업데이트
+	 */
+	public void changeThumbnail(Playlist playlist, String imageUrl) {
+		playlist.setImageUrl(imageUrl);
+	}
 }

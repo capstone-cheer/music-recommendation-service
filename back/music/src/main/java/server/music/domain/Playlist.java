@@ -65,4 +65,8 @@ public class Playlist {
 		playlistSongs.add(playlistSong);
 		playlistSong.setPlaylist(this);
 	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

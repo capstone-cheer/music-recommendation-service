@@ -74,13 +74,17 @@ public class PlaylistService {
 		return playlistRepository.findAllUserPlaylist(member);
 	}
 
+	@Transactional
 	public List<SongResultDto> getSongList(Long memberId, Long playlistId) throws IllegalStateException {
-		Playlist one = validatePlaylistId(memberId, playlistId);
-		if (one == null) {
+		Playlist playlist = validatePlaylistId(memberId, playlistId);
+		if (playlist == null) {
 			throw new IllegalStateException("존재하지 않는 플레이리스트 입니다.");
 		}
-		List<PlaylistSong> playlistSongs = one.getPlaylistSongs();
+		List<PlaylistSong> playlistSongs = playlist.getPlaylistSongs();
 		List<SongResultDto> ret = new ArrayList<>();
+		if(!playlistSongs.isEmpty()){
+			playlist.setImageUrl(playlistSongs.get(0).getSong().getImageUrl());
+		}
 		for (PlaylistSong playlistSong : playlistSongs) {
 			Song song = playlistSong.getSong();
 			ret.add(new SongResultDto(
