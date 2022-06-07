@@ -46,9 +46,15 @@ public class PlaylistController {
 	 * 재생목록에 음악 추가
 	 */
 	@PostMapping("/playlists/{playlist_id}/add")
-	public void addSongs(@PathVariable("playlist_id") Long playlistId, @RequestBody SongCodeDto songCodeDto) {
-		List<String> songCodeList = songCodeDto.getSongCodeList();
-		playlistService.addSongs(playlistId, songCodeList);
+	public ResponseEntity<String> addSongs(@PathVariable("playlist_id") Long playlistId,
+			@RequestBody SongIdListForm songCodeDto) {
+		List<String> songCodeList = songCodeDto.getSongIdList();
+		try {
+			playlistService.addSongs(playlistId, songCodeList);
+			return ResponseEntity.ok("success");
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body("fail");
+		}
 	}
 
 	/**
@@ -68,7 +74,7 @@ public class PlaylistController {
 		return playlists;
 	}
 
-	@GetMapping("/playlist/{member_id}/{playlist_id}")
+	@GetMapping("/playlists/{member_id}/{playlist_id}")
 	public ResponseEntity<List<SongResultDto>> getSongsInPlaylist(
 			@PathVariable("member_id") Long memberId,
 			@PathVariable("playlist_id") Long playlistId) {
