@@ -24,7 +24,7 @@ public class RecommendationController {
 	}
 
 	@PostMapping("/recommend/playlist")
-	public ResponseEntity<List<SongResultDto>> recommendSongsByPlaylist(@RequestBody RecommendPlaylistForm form) {
+	public ResponseEntity<List<SongResultDto>> recommendSongsByPlaylist(@RequestBody SongIdListForm form) {
 		List<String> songIdList = form.getSongIdList();
 		List<SongResultDto> songList = recommendationService.getSongListFromFlaskPlaylist(songIdList);
 		return ResponseEntity.ok(songList);
