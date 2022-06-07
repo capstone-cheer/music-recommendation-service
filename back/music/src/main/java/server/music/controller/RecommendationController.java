@@ -17,16 +17,18 @@ public class RecommendationController {
 	private final RecommendationService recommendationService;
 
 	@PostMapping("/recommend/song")
-	public ResponseEntity<List<SongResultDto>> recommendSongsBySong(@RequestBody SongForm song) {
-		String songId = song.getSongId();
-		List<SongResultDto> songList = recommendationService.getSongListFromFlask(songId);
+	public ResponseEntity<List<SongResultDto>> recommendSongsBySong(@RequestBody RecommendSongForm form) {
+		String songId = form.getSongId();
+		List<String> category = form.getCategory();
+		List<SongResultDto> songList = recommendationService.getSongListFromFlask(songId, category);
 		return ResponseEntity.ok(songList);
 	}
 
 	@PostMapping("/recommend/playlist")
-	public ResponseEntity<List<SongResultDto>> recommendSongsByPlaylist(@RequestBody SongIdListForm form) {
+	public ResponseEntity<List<SongResultDto>> recommendSongsByPlaylist(@RequestBody RecommendSongListForm form) {
 		List<String> songIdList = form.getSongIdList();
-		List<SongResultDto> songList = recommendationService.getSongListFromFlaskPlaylist(songIdList);
+		List<String> category = form.getCategory();
+		List<SongResultDto> songList = recommendationService.getSongListFromFlaskPlaylist(songIdList, category);
 		return ResponseEntity.ok(songList);
 	}
 }

@@ -19,7 +19,7 @@ public class RecommendationService {
 	private final SpotifyApi spotifyApi;
 	private final SpotifyService spotifyService;
 
-	public List<SongResultDto> getSongListFromFlask(String songId) {
+	public List<SongResultDto> getSongListFromFlask(String songId, List<String> category) {
 		List<SongResultDto> ret = new ArrayList<>();
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -27,6 +27,7 @@ public class RecommendationService {
 		String targetUrl = "http://127.0.0.1:5000/recommend/song";
 		JSONObject requestBody = new JSONObject();
 		requestBody.put("song_id", songId);
+		requestBody.put("category", category);
 		FlaskPlaylistDto flaskPlaylistDto = restTemplate.postForObject(targetUrl, requestBody, FlaskPlaylistDto.class);
 
 		//이제 받아서 song ID list로 song id, name, albumname, artist name 뽑아서 SongResultDto로 만들어서 클라이언트에 리턴
@@ -52,13 +53,14 @@ public class RecommendationService {
 
 
 
-	public List<SongResultDto> getSongListFromFlaskPlaylist(List<String> songIdList) {
+	public List<SongResultDto> getSongListFromFlaskPlaylist(List<String> songIdList, List<String> category) {
 
 		RestTemplate restTemplate = new RestTemplate();
 
 		String targetUrl = "http://127.0.0.1:5000/recommend/playlist";
 		JSONObject requestBody = new JSONObject();
 		requestBody.put("song_id_list", songIdList);
+		requestBody.put("category", category);
 		FlaskPlaylistDto flaskPlaylistDto = restTemplate.postForObject(targetUrl, requestBody, FlaskPlaylistDto.class);
 
 		List<String> flaskResult = flaskPlaylistDto.getSongIdList();
