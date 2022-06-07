@@ -1,4 +1,8 @@
 .idea
 recommendation/models/
+recommendation/datasets/
+*.pyc
+recommendation/__pycache__/
 
+myvenv
 venv
