@@ -41,21 +41,21 @@ public class MemberController {
 	public List<MemberDto> memberList() {
 		List<Member> memberList = memberService.findMemberList();
 		return memberList.stream()
-			.map(member -> new MemberDto(member.getId(), member.getLoginId()))
-			.collect(Collectors.toList());
+				.map(member -> new MemberDto(member.getId(), member.getLoginId()))
+				.collect(Collectors.toList());
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody MemberForm form) {
+	public ResponseEntity<MemberIdDto> login(@RequestBody MemberForm form) {
 		Member member = new Member();
 		member.setLoginId(form.getLoginId());
 		member.setPassword(form.getPassword());
 
 		try {
-			memberService.login(member);
+			return ResponseEntity.ok(
+					new MemberIdDto(memberService.login(member)));
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().eTag(e.getMessage()).build();
 		}
-		return ResponseEntity.ok("로그인 완료");
 	}
 }
