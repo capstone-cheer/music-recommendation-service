@@ -64,6 +64,20 @@ public class PlaylistService {
 			);
 			findPlaylist.addPlaylistSong(playlistSong);
 		}
+
+		updatePlaylistThumbnail(findPlaylist);
+	}
+
+	/**
+	 * 플레이리스트 썸네일 변경
+	 */
+	private void updatePlaylistThumbnail(Playlist playlist) {
+		List<PlaylistSong> playlistSongs = playlist.getPlaylistSongs();
+		if (playlistSongs.isEmpty()) {
+			return;
+		}
+		playlistRepository.changeThumbnail(playlist,
+				playlistSongs.get(0).getSong().getImageUrl());
 	}
 
 	/**
@@ -74,7 +88,9 @@ public class PlaylistService {
 		return playlistRepository.findAllUserPlaylist(member);
 	}
 
-	@Transactional
+	/**
+	 * 플레이리스트 내부의 음악 목록 가져오기
+	 */
 	public List<SongResultDto> getSongList(Long memberId, Long playlistId) throws IllegalStateException {
 		Playlist playlist = validatePlaylistId(memberId, playlistId);
 		if (playlist == null) {
@@ -82,16 +98,14 @@ public class PlaylistService {
 		}
 		List<PlaylistSong> playlistSongs = playlist.getPlaylistSongs();
 		List<SongResultDto> ret = new ArrayList<>();
-		if(!playlistSongs.isEmpty()){
-			playlist.setImageUrl(playlistSongs.get(0).getSong().getImageUrl());
-		}
 		for (PlaylistSong playlistSong : playlistSongs) {
 			Song song = playlistSong.getSong();
 			ret.add(new SongResultDto(
 					song.getSongCode(),
 					song.getTitle(),
 					song.getAlbumTitle(),
-					song.getArtist()
+					song.getArtist(),
+					song.getImageUrl()
 			));
 		}
 		return ret;

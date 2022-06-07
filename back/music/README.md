@@ -69,6 +69,43 @@ HTTP/1.1 409 Conflict
 </details>
 
 <details markdown="1" style="margin-left:14px">
+<summary>로그인</summary>
+
+* **URL**
+
+  /login
+
+* **Method:**
+
+  `POST`
+
+* **Data Params**
+
+  **Required:**
+
+  `loginId=[String] - 로그인 아이디`  
+  `password=[String] - 패스워드`
+
+  **Optional:**
+
+  `없음`
+
+* **Response**
+
+  `memberId=[Long] - 유저 고유식별 번호` 
+
+* **Success Response:**
+```
+HTTP/1.1 200 OK
+Content-type: application/json;charset=UTF-8
+{
+  "memberId": 1
+}
+```
+
+</details>
+
+<details markdown="1" style="margin-left:14px">
 <summary>회원 리스트 조회</summary>
 
 * **URL**
@@ -159,7 +196,11 @@ Content-type: application/json;charset=UTF-8
 </details>
 
 <details markdown="1" style="margin-left:14px">
-<summary>회원 플레이리스트 목록 조회</summary>
+<summary>회원 플레이리스트 목록 조회</summary>  
+
+```
+플레이리스트 고유 아이디, 플레이리스트 이름, 썸네일(첫 곡 앨범커버)를 가져옵니다.
+```  
 
 * **URL**
 
@@ -200,8 +241,294 @@ Content-type: application/json;charset=UTF-8
 ```
 </details>
 
+<details markdown="1" style="margin-left:14px">
+<summary>플레이리스트에 음악 추가</summary>  
+
+```
+플레이리스트에 음악을 여러 개 추가합니다.
+```  
+
+* **URL**
+
+  /playlists/{playlist_id}/add
+
+* **Method:**
+
+  `POST`
+
+* **Request Body (JSON)**
+
+```json
+  {
+    "songIdList": [
+      "1VnjByC7TUx5A73A4qtgoo",
+      "3P3UA61WRQqwCXaoFOTENd",
+      "2GBrW5lRWjAQMhK612qzVg",
+      "4eFTh1opLS5wANDmZK9ghC"
+    ]
+  }
+```
+
+* **Response**
+
+  `200 OK`
+
+* **Success Response:**
+```
+success
+```
 </details>
 
+<details markdown="1" style="margin-left:14px">
+<summary>플레이리스트 음악 목록 가져오기</summary>  
+
+```
+플레이리스트 하나의 모든 음악 spotify id를 가져옵니다.
+```  
+
+* **URL**
+
+  /playlists/{memberId}/{playlistId}
+
+* **Method:**
+
+  `GET`
+
+* **Request Body (JSON)**
+
+```
+  없음
+```
+
+* **Response**
+
+  `200 OK`
+
+* **Success Response:**
+```json
+[
+    {
+        "id": "3P3UA61WRQqwCXaoFOTENd",
+        "name": "Through the Night",
+        "albumName": "Palette",
+        "artistName": "IU",
+        "imageUrl": ""
+    },
+    {
+        "id": "1VnjByC7TUx5A73A4qtgoo",
+        "name": "우산 (feat. 윤하)",
+        "albumName": "Pieces, Part One",
+        "artistName": "Epik High",
+        "imageUrl": ""
+    },
+    {
+        "id": "2GBrW5lRWjAQMhK612qzVg",
+        "name": "The End",
+        "albumName": "One Strange Night",
+        "artistName": "Kwon Jin Ah",
+        "imageUrl": ""
+    },
+    {
+        "id": "4eFTh1opLS5wANDmZK9ghC",
+        "name": "Cherry Blossom Ending",
+        "albumName": "Busker Busker 1st",
+        "artistName": "Busker Busker",
+        "imageUrl": ""
+    }
+]
+```
+</details>
+
+</details>
+
+<details markdown="1">
+<summary>추천 API</summary>
+
+<details markdown="1" style="margin-left:14px">
+<summary>노래 하나로 추천</summary>
+
+* **URL**
+
+  /recommend/song
+
+* **Method:**
+
+  `POST`
+
+* **Data Params**
+
+  **Required:**
+
+```json
+{
+  "songId": "3P3UA61WRQqwCXaoFOTENd",
+  "category": [
+    "danceability",
+    "tempo"
+  ]
+}
+```
+
+* **Response**
+
+  `id=[String] - spotify 음악 id`  
+  `name=[String] - 노래 제목`
+  `albumName=[String] - 앨범 제목`
+  `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 앨범커버url`
+
+* **Success Response:**
+```json
+[
+    {
+        "id": "4UCkX8nrBlpxjrrEqtb46a",
+        "name": "Apache",
+        "albumName": "8th Wonder",
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    }
+]
+```
+
+</details>
+
+
+<details markdown="1" style="margin-left:14px">
+<summary>플레이리스트로 추천</summary>
+
+* **URL**
+
+  /recommend/playlist
+
+* **Method:**
+
+  `POST`
+
+* **Data Params**
+
+  **Required:**
+
+```json
+{
+  "songIdList": [
+    "3P3UA61WRQqwCXaoFOTENd",
+    "1VnjByC7TUx5A73A4qtgoo",
+    "2GBrW5lRWjAQMhK612qzVg",
+    "4eFTh1opLS5wANDmZK9ghC"
+  ],
+  "category": [
+    "danceability",
+    "tempo"
+  ]
+}
+```
+
+* **Response**
+
+  `id=[String] - spotify 음악 id`  
+  `name=[String] - 노래 제목`
+  `albumName=[String] - 앨범 제목`
+  `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 앨범커버url`
+
+* **Success Response:**
+```json
+[
+    {
+        "id": "4UCkX8nrBlpxjrrEqtb46a",
+        "name": "Apache",
+        "albumName": "8th Wonder",
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    }
+]
+```
+
+</details>
+
+</details>
+
+<details markdown="1">
+<summary>검색</summary>
+
+* **URL**
+
+  /search?keyword={}
+
+* **Method:**
+
+  `GET`
+
+* **Data Params**
+
+```
+none
+```
+
+* **Response**
+
+  `id=[String] - spotify 음악 id`  
+  `name=[String] - 노래 제목`
+  `albumName=[String] - 앨범 제목`
+  `artistName=[String] - 가수 이름`
+  `imageUrl=[String] - 가수 이름`
+
+* **Success Response:**
+```json
+[
+    {
+        "id": "4UCkX8nrBlpxjrrEqtb46a",
+        "name": "Apache",
+        "albumName": "8th Wonder",
+        "artistName": "The Sugarhill Gang",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    },
+    {
+        "id": "5xJ5bNY2SUh1iO2l8Hj9l1",
+        "name": "Ping Pong",
+        "albumName": "Collected Recordings",
+        "artistName": "Gareth Dickson",
+        "imageUrl": ""
+    }
+]
+```
+
+</details>
 
 ## 서버 실행 방법
 

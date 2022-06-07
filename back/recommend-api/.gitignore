@@ -6,3 +6,7 @@ recommendation/__pycache__/
 
 myvenv
 venv
+spotify/spotifyApi
+
+# spotipy 라이브러리 사용시 생성되는 access token
+.cache
