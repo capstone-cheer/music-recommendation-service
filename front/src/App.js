@@ -10,6 +10,7 @@ function App() {
 
   //전역변수
   const [ searchRequest, setSearchRequest ] = useState(null);
+  const [ searchResponse, setSearchResponse ] = useState(null);
   const [ selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [ playingPlaylist, setPlayingPlaylist] = useState(null);
   const [ playingTrackList, setPlayingTrackList ] = useState(null);
@@ -25,17 +26,23 @@ function App() {
   const changePlayingTrackList = (value) => {
     setPlayingTrackList(value);
   }
+  const changeSetSearchResponse = (value) => {
+    setSearchResponse(value)
+    console.log('global search res', value)
+  }
 
 
   const globalVar = {
     searchRequest: searchRequest,
+    searchResponse: searchResponse,
     selectedPlaylist: selectedPlaylist,
     playingPlaylist: playingPlaylist,
     playingTrackList: playingTrackList,
     changeSearchRequest,
     changeSelectedPlaylist,
     changePlayingPlaylist,
-    changePlayingTrackList
+    changePlayingTrackList,
+    changeSetSearchResponse,
   }
 
   useEffect(() => {

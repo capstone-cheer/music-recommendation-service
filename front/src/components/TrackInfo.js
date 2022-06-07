@@ -4,6 +4,7 @@ import "../css/TrackInfo.css";
 
 function TrackInfo(props) {
     const [isMouseOver, setIsMouseOver] = useState(0);
+
     const submitTrackToPlay = (value) => {
         console.log(value);
     }
@@ -29,16 +30,16 @@ function TrackInfo(props) {
             <div className="track__detail">
                 <div className="album__title__box">
                     <div className="title__info">
-                        {props.track.title}
+                        {props.track.name}
                     </div>
                     <div className="album__info">
-                        {props.track.album}
+                        {props.track.albumName}
                     </div>
                 </div>
 
                 <div className="artist__box">
                     <div className="artist__info">
-                        {props.track.artist}
+                        {props.track.artistName}
                     </div>
                 </div>
             </div>

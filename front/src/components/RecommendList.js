@@ -36,6 +36,7 @@ const categorySetting = [
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
 
+
     const openRecommendSetting = () => {
         // 추천 카테고리 설정 fetch
         setRecommendSettingOpen(true);

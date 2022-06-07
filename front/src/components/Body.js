@@ -8,15 +8,15 @@ import "../css/Body.css";
 function Body(props) {
     const [playlists, setPlaylists] = useState([]);
     const getUserPlaylists = async () => {
-        await axios.get("/playlists/"+sessionStorage.getItem('member_id'))
+        await axios.get("/playlists/" + sessionStorage.getItem('member_id'))
         .then(function (res) {
-            setPlaylists(res.data)
+            setPlaylists(() => res.data)
         })
     }
 
     useEffect(() => {
         getUserPlaylists()
-    })
+    }, [])
 
 
     return (

@@ -3,23 +3,22 @@ import { IoSearch } from "react-icons/io5";
 import "../css/Header.css";
 import LoginStatus from "./LoginStatus";
 import AppContext from "./AppContext";
+import axios from "axios";
 
 // Main > Header
 function Header(props) {
     const [inputSearch, setInputSearch] = useState('');
-
     const globalVar = useContext(AppContext);
-
     const handleInputSearch = (e) => {
         setInputSearch(e.target.value);
     }
 
-    const submit = (inputSearch) => {
+    const submit = () => {
         // 검색결과 fetch하고 container의 내용을 검색결과에 대한 내용으로 새로 렌더링해줘야함
         // => main으로 보내고, main에서는 다시 body -> container로 전달
         if (inputSearch !== ''){
             globalVar.changeSearchRequest(inputSearch);
-            globalVar.changeSelectedPlaylist(null);
+            console.log(inputSearch)
             setInputSearch('');
         }
     }
@@ -42,9 +41,7 @@ function Header(props) {
                 </div>
 
                 <div className="search__submit__button">
-                    <button onClick={ () => {
-                        submit(inputSearch);
-                    }}>
+                    <button onClick={submit}>
                         <IoSearch size='24' color="white"/>
                     </button>
                 </div>
