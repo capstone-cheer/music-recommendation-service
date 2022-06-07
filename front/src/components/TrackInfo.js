@@ -7,6 +7,7 @@ function TrackInfo(props) {
 
     const submitTrackToPlay = (value) => {
         console.log(value);
+        console.log(props.track);
     }
 
     return(
@@ -23,7 +24,7 @@ function TrackInfo(props) {
                         <IoPlayCircle className="track__info__play__circle" size='50' color="#1db954" />
                     </button>
                 </div>
-                : <img src="https://i.scdn.co/image/ab67616d00001e027359994525d219f64872d3b1" className="track__cover" alt="cover"/>
+                : <img src={props.track.imageUrl} className="track__cover" alt="cover"/>
             }
             
 
