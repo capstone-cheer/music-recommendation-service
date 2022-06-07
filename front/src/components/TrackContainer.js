@@ -4,6 +4,7 @@ import "../css/TrackContainer.css";
 import TrackCategory from "./TrackCategory";
 import TrackInfo from "./TrackInfo";
 import AppContext from "./AppContext";
+import axios from "axios";
 
 const playlist = {
     'id':'1',
@@ -29,9 +30,17 @@ const playlist = {
 // Container > TrackContainer
 function TrackContainer(props) {
     const globalVar = useContext(AppContext);
+    const [playlistItems, setPlaylistItems] = useState(null);
 
     const submitPlaylistToPlay = (value) => {
         console.log(value);
+    }
+
+    const getPlaylistItems = async () => {
+        await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlist_id)
+        .then(function (res) {
+            setPlaylistItems(res.data);
+        })
     }
 
     // 서버에 playlist id값으로 트랙 리스트 fetch

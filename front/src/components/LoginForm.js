@@ -3,15 +3,6 @@ import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
 import '../css/LoginForm.css';
 
-const fetchLogin = async (loginId, password) => {
-    console.log(loginId, password);
-
-    // 서버에 로그인 요청
-
-    sessionStorage.setItem('member_id', '1');
-    window.location.replace("/");
-}
-
 // Login > LoginForm
 function LoginForm(props) {
     const [loginId, setLoginId] = useState('')
@@ -24,8 +15,25 @@ function LoginForm(props) {
         setPassword(e.target.value)
     }
 
+    const postLogin = async (loginId, password) => {
+        await axios.post("/login", {
+            loginId: loginId,
+            password: password
+        }).then(function (res) {
+            console.log(res)
+            sessionStorage.setItem('member_id', res.data.member_id);
+            window.location.replace("/");
+        }).catch(function (error) {
+            console.log('err', error);
+            alert('잘못된 아이디 또는 비밀번호입니다.')
+
+            sessionStorage.setItem('member_id', "1");
+            window.location.replace("/");
+        });
+    }
+
     const submit = () => {
-        fetchLogin(loginId, password);
+        postLogin(loginId, password);
     }
 
     return (

@@ -12,26 +12,30 @@ function App() {
   const [ searchRequest, setSearchRequest ] = useState(null);
   const [ selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [ playingPlaylist, setPlayingPlaylist] = useState(null);
-
+  const [ playingTrackList, setPlayingTrackList ] = useState(null);
   const changeSearchRequest = (value) => {
     setSearchRequest(value);
   }
-
   const changeSelectedPlaylist = (value) => {
     setSelectedPlaylist(value);
   }
-
   const changePlayingPlaylist = (value) => {
     setPlayingPlaylist(value);
   }
+  const changePlayingTrackList = (value) => {
+    setPlayingTrackList(value);
+  }
+
 
   const globalVar = {
     searchRequest: searchRequest,
     selectedPlaylist: selectedPlaylist,
     playingPlaylist: playingPlaylist,
+    playingTrackList: playingTrackList,
     changeSearchRequest,
     changeSelectedPlaylist,
-    changePlayingPlaylist
+    changePlayingPlaylist,
+    changePlayingTrackList
   }
 
   useEffect(() => {

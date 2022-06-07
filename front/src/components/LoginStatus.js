@@ -16,7 +16,10 @@ function LoginStatus(props) {
                     Authorization: `Bearer ${Cookies.get('spotifyAuthToken')}`
                 }
             }).then(function (res) {
+                console.log('spotify res : ', res.data.display_name)
                 setSpotifyId(res.data.display_name);
+            }).catch(function (err) {
+                console.log('spotify err : ', err)
             })
     }
 
@@ -25,15 +28,13 @@ function LoginStatus(props) {
         if(Cookies.get('spotifyAuthToken')) {
             fetchSpotifyProfile();
         };
-    }, [Cookies.get('spotifyAuthToken')]);
-
+    }, []);
 
     const submitLogout = () => {
         sessionStorage.clear();
         Cookies.remove('spotifyAuthToken')
         window.location.replace("/");
     }
-
 
     return(
         <div>
