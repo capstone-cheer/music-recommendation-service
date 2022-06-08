@@ -20,7 +20,9 @@ function Container(props){
     const getPlaylistItems = async () => {
         await axios.get("/playlists/"+sessionStorage.getItem('member_id')+"/"+ globalVar.selectedPlaylist.playlistId)
         .then(function (res) {
-            setPlaylistItems(res.data);
+            if (res.data.length !== 0){
+                setPlaylistItems(res.data);
+            }
         })
     }
 

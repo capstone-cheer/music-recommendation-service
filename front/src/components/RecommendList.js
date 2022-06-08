@@ -14,6 +14,8 @@ function RecommendList(props) {
     const [recommendSetting, setRecommendSetting] = useState(null);
     const globalVar = useContext(AppContext);
 
+    console.log('props', props.playlistItems);
+
     const makeSongIdList = () => {
         const tmpSongIdList = [];
         props.playlistItems && props.playlistItems.map((track, index) => {
@@ -45,25 +47,27 @@ function RecommendList(props) {
     }
     
     useEffect(() => {
-        if(globalVar.searchRequest === null) {
+        if(globalVar.searchRequest === null && songIdList !== null) {
             fetchRecommendByList();
         }
     },[globalVar.recommendCategory]);
 
     useEffect(() => {
-        if(globalVar.searchRequest === null){
+        if(globalVar.searchRequest === null && songIdList !== null){
             fetchRecommendByList();
         }
     },[songIdList])
 
     useEffect(() => {
-        if(globalVar.searchRequest === null){
+        if(globalVar.searchRequest === null && props.playlistItems !== null){
             makeSongIdList();
         }
     }, [props.playlistItems])
 
     useEffect(() => {
-        fetchRecommendByItem();
+        if(globalVar.recommendSource !== null) {
+            fetchRecommendByItem();
+        }
     }, [globalVar.recommendSource, globalVar.recommendCategory])
 
 
