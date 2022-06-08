@@ -46,6 +46,7 @@ function RecommendSettingPopup(props){
         if (checkedCategory.size > 0) {
             const tmpArr = [...checkedCategory]
             globalVar.changeRecommendCategory(tmpArr)
+            
             setCheckedCategory(new Set());
             props.close();
         }

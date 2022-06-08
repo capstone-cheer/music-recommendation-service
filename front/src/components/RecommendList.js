@@ -11,7 +11,7 @@ function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
     const [songIdList, setSongIdList] = useState(null);
     const [recommendItems, setRecommendItems] = useState(null);
-
+    const [recommendSetting, setRecommendSetting] = useState(null);
     const globalVar = useContext(AppContext);
 
     const makeSongIdList = () => {
@@ -21,23 +21,29 @@ function RecommendList(props) {
         })
         setSongIdList(tmpSongIdList);
     }
-    
 
-    const getPlaylistItems = async (value) => {
-        makeSongIdList();
-        console.log('fetch',value)
+    const getPlaylistItems = async () => {
+        console.log('get',songIdList)
         await axios.post("/recommend/playlist", {
-            songIdList: value,
+            songIdList: songIdList,
             category : globalVar.recommendCategory,
         }).then(function (res) {
-            setRecommendItems(() => res.data);
+            setRecommendItems(res.data);
             console.log(res.data)
         })
     }
+    
+    useEffect(() => {
+        getPlaylistItems();
+    },[globalVar.recommendCategory]);
 
     useEffect(() => {
-        getPlaylistItems(songIdList);
-    }, [globalVar.selectedPlaylist, globalVar.recommendCategory]);
+        getPlaylistItems()
+    },[songIdList])
+
+    useEffect(() => {
+        makeSongIdList();
+    }, [props.playlistItems])
 
 
     const openRecommendSetting = () => {
