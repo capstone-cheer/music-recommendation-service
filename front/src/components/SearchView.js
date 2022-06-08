@@ -4,21 +4,17 @@ import AppContext from "./AppContext";
 import { IoAddCircle, IoPlayCircle } from "react-icons/io5"
 import axios from "axios"
 
-// 55 -> 20 15 20
 function SearchResultCategory() {
-    const globalVar = useContext(AppContext);
-
-    // 30 25 25
     return(
         <div className="search__result__category">
             <div className="search__result__category__title">
                 <p>TITLE</p>
             </div>
-            <div className="search__result__category__album">
-                <p>ALBUM</p>
-            </div>
             <div className="search__result__category__artist">
                 <p>ARTIST</p>
+            </div>
+            <div className="search__result__category__blank">
+                &nbsp;
             </div>
         </div>
     );
@@ -46,40 +42,46 @@ function SearchResultTrack(props) {
         })
     }
 
-    // 35 25 20 5
-    // 20 15 15 5
     return (
         <div className="search__result__track" onMouseOver={ () => setIsMouseOver(1)}
                                                 onMouseOut={ () => setIsMouseOver(0)}>
-            <div className="search__result__track__title">
-                {isMouseOver ?
-                    <div className="search__result__track__play__button">
-                        <button onClick={ () => {
-                            submitTrackToPlay(props)
-                        }}>
-                            <IoPlayCircle className="search__result__track__play__circle" size='50' color="#1db954" />
-                        </button>
+            
+            <div className="search__result__track__detail">
+                <div className="search__result__album__title__box">
+                    <div className="search__result__track__cover">
+                        {isMouseOver ?
+                            <div className="search__result__track__play__button">
+                                <button onClick={ () => {
+                                    submitTrackToPlay(props)
+                                }}>
+                                    <IoPlayCircle className="search__result__track__play__circle" size='50' color="#1db954" />
+                                </button>
+                            </div>
+                            :   <img src={props.track.imageUrl} 
+                                    className="search__result__track__cover__img" 
+                                    alt="cover"
+                                />
+                        }
                     </div>
-                    : <img src={props.track.imageUrl} 
-                            className="search__result__track__cover" 
-                            alt="cover"
-                />
-                }
-
-                <p>{props.track.name}</p>
-            </div>
-            <div className="search__result__track__album">
-                <p>{props.track.albumName}</p>
-            </div>
-            <div className="search__result__track__artist">
-                <p>{props.track.artistName}</p>
-            </div>
-            <div className="search__result__track__add">
-                <button onClick={ () => {
-                    addTrackToPlaylist();
-                }}>
-                    <IoAddCircle size={30} color={'green'}/>
-                </button>
+                    <div className="search__result__album__title">
+                        <div className="search__result__track__title">
+                            {props.track.name}
+                        </div>
+                        <div className="search__result__track__album">
+                            {props.track.albumName}
+                        </div>
+                    </div>
+                </div>
+                <div className="search__result__track__artist">
+                    {props.track.artistName}
+                </div>
+                <div className="search__result__track__add">
+                    <button onClick={ () => {
+                        addTrackToPlaylist();
+                    }}>
+                        <IoAddCircle size={30} color={'green'}/>
+                    </button>
+                </div>
             </div>
         </div>
     );

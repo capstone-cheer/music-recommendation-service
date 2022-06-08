@@ -31,21 +31,47 @@
 
 
 
-.search__result__track {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
 
 .search__result__track:hover{
     background-color: gray;
     color: black;
 }
 
-.search__result__track__title {
+.search__result__track__detail{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 50px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.search__result__album__title__box {
     display: flex;
     flex-direction: row;
-    width: 20vw;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30vw;
+}
+
+.search__result__album__title {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 10px;
+}
+
+.search__result__track__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
 }
 
 .search__result__track__play__button {
@@ -71,7 +97,7 @@
 }
 
 
-.search__result__track__cover {
+.search__result__track__cover__img {
     height: 50px;
     width: 50px;
 }
@@ -82,15 +108,19 @@
 }
 
 .search__result__track__album {
-    display: flex;
-    flex-direction: row;
-    width: 15vw;
+    color: #999999;
+    font-size: 12px;
 }
 
 .search__result__track__artist {
-    display: flex;
-    flex-direction: row;
-    width: 15vw;
+    flex-shrink: 0;
+    padding: 0px;
+    overflow: hidden;
+    font-size: 14px;
+    width: 20vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
 }
 
 .search__result__track__add {
@@ -119,17 +149,11 @@
 
 .search__result__category__title {
     text-align: left;
-    width: 20vw;
+    width: 30vw;
 }
 
 .search__result__category__title > p {
     margin: 0;
-}
-
-.search__result__category__album {
-    flex-grow: 1;
-    text-align: left;
-    width: 15vw;
 }
 
 .search__result__category__album > p {
@@ -138,10 +162,14 @@
 
 .search__result__category__artist {
     flex-grow: 1;
-    text-align: left;
-    width: 20vw;
+    text-align: right;
+    width: 25vw;
 }
 
 .search__result__category__artist > p {
     margin: 0;
+}
+
+.search__result__category__blank {
+    width: 5vw
 }

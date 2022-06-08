@@ -1,25 +1,25 @@
-.track__info {
+.recommend__track__info {
     color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 55vw;
+    width: 30vw;
     border-bottom: 2px solid #1b1b1b;
 }
 
-.track__info:hover{
+.recommend__track__info:hover{
     background-color: gray;
     color: black;
 }
 
-.track__order {
+.recommend__track__order {
     width: 20px;
     padding: 10px;
     font-size: 16px;
     color: white;
 }
 
-.track__info__play__button {
+.recommend__track__info__play__button {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,7 +29,7 @@
     padding: 0;
 }
 
-.track__info__play__button > button {
+.recommend__track__info__play__button > button {
     background-color: transparent;
     border: 0;
     box-shadow: 0;
@@ -37,16 +37,16 @@
     padding: 0;
 }
 
-.track__info__play__circle {
+.recommend__track__info__play__circle {
     margin: 0;
 }
 
-.track__cover {
+.recommend__track__cover {
     height: 50px;
     width: 50px;
 }
 
-.track__detail {
+.recommend__track__detail {
     display: flex;
     flex-grow: 1;
     flex-shrink: 0;
@@ -60,34 +60,34 @@
     text-overflow: ellipsis;
 }
 
-.album__title__box {
+.recommend__album__title__box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.title__info {
+.recommend__title__info {
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 30vw;
+    max-width: 17vw;
 }
 
-.album__info {
+.recommend__album__info {
     color: #999999;
     font-size: 12px;
 }
 
-.album__info:hover {
+.recommend__album__info:hover {
     color: black;
 
 }
 
-.artist__box {
+.recommend__artist__box {
     flex-shrink: 0;
     padding: 0px;
     overflow: hidden;
     font-size: 14px;
-    max-width: 25vw;
+    max-width: 13vw;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
