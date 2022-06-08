@@ -1,16 +1,32 @@
 .search__view {
+    display: flex;
+    flex-direction: column;
     color: white;
+    width: 55vw;
+    height: 75vh;
+    overflow: scroll;
 }
 
 .search__view > ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search__result__ul {
+    display: flex;
+    flex-direction: column;
     overflow: scroll;
+}
+
+.search__result__ul > ul {
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .search__result__num {
-    padding: 5px;
+    padding: 10px;
 }
 
 
@@ -29,7 +45,7 @@
 .search__result__track__title {
     display: flex;
     flex-direction: row;
-    width: 35vw;
+    width: 20vw;
 }
 
 .search__result__track__play__button {
@@ -68,13 +84,13 @@
 .search__result__track__album {
     display: flex;
     flex-direction: row;
-    width: 25vw;
+    width: 15vw;
 }
 
 .search__result__track__artist {
     display: flex;
     flex-direction: row;
-    width: 20vw;
+    width: 15vw;
 }
 
 .search__result__track__add {
@@ -103,7 +119,7 @@
 
 .search__result__category__title {
     text-align: left;
-    width: 35vw;
+    width: 20vw;
 }
 
 .search__result__category__title > p {
@@ -113,7 +129,7 @@
 .search__result__category__album {
     flex-grow: 1;
     text-align: left;
-    width: 25vw;
+    width: 15vw;
 }
 
 .search__result__category__album > p {
@@ -123,7 +139,7 @@
 .search__result__category__artist {
     flex-grow: 1;
     text-align: left;
-    width: 25vw;
+    width: 20vw;
 }
 
 .search__result__category__artist > p {

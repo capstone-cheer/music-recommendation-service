@@ -14,6 +14,7 @@ function App() {
   const [ selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [ playingPlaylist, setPlayingPlaylist] = useState(null);
   const [ playingTrackList, setPlayingTrackList ] = useState(null);
+  const [ recommendSource, setRecommendSource ] = useState(null)
   const [ recommendCategory, setRecommendCategory ] = useState(['tempo', 'danceability', 'acousticness', 'energe']);
 
   const changeSearchRequest = (value) => {
@@ -31,7 +32,9 @@ function App() {
   const changeSetSearchResponse = (value) => {
     setSearchResponse(value)
   }
-
+  const changeRecommendSource = (value) => {
+    setRecommendSource(value);
+  }
   const changeRecommendCategory = (value) => {
     setRecommendCategory(value);
   }
@@ -43,12 +46,14 @@ function App() {
     selectedPlaylist: selectedPlaylist,
     playingPlaylist: playingPlaylist,
     playingTrackList: playingTrackList,
+    recommendSource: recommendSource,
     recommendCategory: recommendCategory,
     changeSearchRequest,
     changeSelectedPlaylist,
     changePlayingPlaylist,
     changePlayingTrackList,
     changeSetSearchResponse,
+    changeRecommendSource,
     changeRecommendCategory
   }
 

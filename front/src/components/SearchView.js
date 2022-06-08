@@ -4,8 +4,10 @@ import AppContext from "./AppContext";
 import { IoAddCircle, IoPlayCircle } from "react-icons/io5"
 import axios from "axios"
 
-
+// 55 -> 20 15 20
 function SearchResultCategory() {
+    const globalVar = useContext(AppContext);
+
     // 30 25 25
     return(
         <div className="search__result__category">
@@ -27,7 +29,9 @@ function SearchResultTrack(props) {
     const [isMouseOver, setIsMouseOver] = useState(0);
 
     const submitTrackToPlay = (value) => {
-        props.submitTrackFromItem(value);
+        console.log("추천해줘", value.track.id)
+        globalVar.changeRecommendSource(value.track.id)
+        props.submitTrackFromItem(value.order);
     }
 
     const addTrackToPlaylist = async () => {
@@ -43,6 +47,7 @@ function SearchResultTrack(props) {
     }
 
     // 35 25 20 5
+    // 20 15 15 5
     return (
         <div className="search__result__track" onMouseOver={ () => setIsMouseOver(1)}
                                                 onMouseOut={ () => setIsMouseOver(0)}>
@@ -50,7 +55,7 @@ function SearchResultTrack(props) {
                 {isMouseOver ?
                     <div className="search__result__track__play__button">
                         <button onClick={ () => {
-                            submitTrackToPlay(props.order)
+                            submitTrackToPlay(props)
                         }}>
                             <IoPlayCircle className="search__result__track__play__circle" size='50' color="#1db954" />
                         </button>
@@ -117,13 +122,15 @@ function SearchView(props) {
                 )}
             </div>
             <SearchResultCategory />
-            <ul>
-                {searchViewTrack && searchViewTrack.map((track, index) => (
-                    <li key={index}>
-                        <SearchResultTrack track={track} submitTrackFromItem={submitTrackFromItem} order={index}/>
-                    </li>
-                ))}
-            </ul>
+            <div className="search__result__ul">
+                <ul>
+                    {searchViewTrack && searchViewTrack.map((track, index) => (
+                        <li key={index}>
+                            <SearchResultTrack track={track} submitTrackFromItem={submitTrackFromItem} order={index}/>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }

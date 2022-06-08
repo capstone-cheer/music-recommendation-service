@@ -38,7 +38,10 @@ function Container(props){
     return (
         <div className="container">
             {globalVar.searchRequest !== null ? (
-                <SearchView searchRequest={globalVar.searchRequest}/>
+                <div className="search__container">
+                    <SearchView searchRequest={globalVar.searchRequest}/>
+                    <RecommendList playlistItems = {playlistItems} />
+                </div>
             ):(globalVar.selectedPlaylist !== null ?(
                 <div className="select__container">
                     <TrackContainer playlistItems = {playlistItems} />

@@ -3,7 +3,11 @@
     width: 85vw;
     height: 75vh;
     flex-direction: column;
-    overflow: scroll;
+}
+
+.search__container {
+    display: flex;
+    flex-direction: row;
 }
 
 .category__container {
