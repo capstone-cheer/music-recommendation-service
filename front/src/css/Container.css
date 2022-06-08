@@ -13,6 +13,8 @@
 .category__container {
     display: flex;
     flex-direction: column;
+    height: 75vh;
+    overflow: scroll;
 }
 
 .category__belt {
