@@ -15,7 +15,7 @@ function App() {
   const [ playingPlaylist, setPlayingPlaylist] = useState(null);
   const [ playingTrackList, setPlayingTrackList ] = useState(null);
   const [ recommendSource, setRecommendSource ] = useState(null)
-  const [ recommendCategory, setRecommendCategory ] = useState(['tempo', 'danceability', 'acousticness', 'energe']);
+  const [ recommendCategory, setRecommendCategory ] = useState(['tempo', 'danceability', 'acousticness', 'energy']);
 
   const changeSearchRequest = (value) => {
     setSearchRequest(value);

@@ -27,7 +27,7 @@ function CategoryLable(props) {
 function RecommendSettingPopup(props){
     const globalVar = useContext(AppContext);
     const [checkedCategory, setCheckedCategory] = useState(new Set());
-    const categoryList = ['tempo', 'danceability', 'acousticness', 'energe'];
+    const categoryList = ['tempo', 'danceability', 'acousticness', 'energy'];
 
     const checkedCategoryHandler = (id, isChecked) => {
         if(isChecked) {
