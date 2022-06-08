@@ -2,19 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import "../css/RecommendList.css";
 import TrackCategory from "./TrackCategory";
-import RecommendTrackInfo from "./RecommendTrackInfo";
+import TrackInfo from "./TrackInfo";
 import AppContext from "./AppContext";
 import RecommendSettingPopup from "./RecommendSettingPopup";
 import axios from "axios";
-
-const test = [
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-    {"id": "1", "name": "test", "artistName": "artistTest", "albumName":"albumTest"},
-]
 
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
@@ -54,13 +45,13 @@ function RecommendList(props) {
     }
     
     useEffect(() => {
-        if(globalVar.searchRequest === null && songIdList !== null) {
+        if(globalVar.searchRequest === null) {
             fetchRecommendByList();
         }
     },[globalVar.recommendCategory]);
 
     useEffect(() => {
-        if(globalVar.searchRequest === null && songIdList !== null){
+        if(globalVar.searchRequest === null){
             fetchRecommendByList();
         }
     },[songIdList])
@@ -72,9 +63,7 @@ function RecommendList(props) {
     }, [props.playlistItems])
 
     useEffect(() => {
-        if(globalVar.searchRequest !== null){
-            fetchRecommendByItem();
-        }
+        fetchRecommendByItem();
     }, [globalVar.recommendSource, globalVar.recommendCategory])
 
 
@@ -105,8 +94,8 @@ function RecommendList(props) {
                     <TrackCategory />
                 </div>
                 <div className="recommend__track__list">
-                    {test && test.map((track, index) => (
-                        <RecommendTrackInfo track={track} order={index+1} />
+                    {recommendItems && recommendItems.map((track, index) => (
+                        <TrackInfo track={track} order={index+1} />
                     ))}
                 </div>    
             </div>
