@@ -7,13 +7,6 @@ import AppContext from "./AppContext";
 import RecommendSettingPopup from "./RecommendSettingPopup";
 import axios from "axios";
 
-const categorySetting = [
-    { 'id':'1', 'category_name' : 'cate1', 'isChecked': true },
-    { 'id':'2', 'category_name' : 'cate2', 'isChecked': false },
-    { 'id':'3', 'category_name' : 'cate3', 'isChecked': true },
-    { 'id':'4', 'category_name' : 'cate4', 'isChecked': true },
-]
-
 function RecommendList(props) {
     const [recommendSettingOpen, setRecommendSettingOpen] = useState(false);
     const [songIdList, setSongIdList] = useState(null);
@@ -35,10 +28,7 @@ function RecommendList(props) {
         console.log('fetch',value)
         await axios.post("/recommend/playlist", {
             songIdList: value,
-            category : [
-                "danceability",
-                "tempo"
-            ]
+            category : globalVar.recommendCategory,
         }).then(function (res) {
             setRecommendItems(() => res.data);
             console.log(res.data)
@@ -46,12 +36,8 @@ function RecommendList(props) {
     }
 
     useEffect(() => {
-        //getPlaylistItems(console.log(songIdList));
-        console.log('songIdList', songIdList)
-        console.log(globalVar.selectedPlaylist)
         getPlaylistItems(songIdList);
-        
-    }, [globalVar.selectedPlaylist]);
+    }, [globalVar.selectedPlaylist, globalVar.recommendCategory]);
 
 
     const openRecommendSetting = () => {
@@ -74,7 +60,7 @@ function RecommendList(props) {
             </div>
             <RecommendSettingPopup open={recommendSettingOpen} 
                                     close={closeRecommendSetting}
-                                    categorySetting={categorySetting} />
+                                    />
 
             <div className="recommend__tracks">
                 <div className="recommend__track__category">

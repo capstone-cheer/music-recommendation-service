@@ -1,54 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import AppContext from "./AppContext";
 import '../css/RecommendSettingPopup.css';
-
-
 
 function CategoryLable(props) {
     const [isChecked, setIsChecked] = useState(false);
 
     const checkedHandler = ({ target }) => {
         setIsChecked(!isChecked);
-        props.checkedCategoryHandler(props.category.id, target.checked);
+        props.checkedCategoryHandler(props.category, target.checked);
     }
 
     return (
         <div className='category__label'>
             <input type="checkbox" 
                     name="category" 
-                    value={props.category.category_name}
+                    value={props.category}
                     onChange={ e => {
                         checkedHandler(e);
-                        console.log('click')
                     }}
             />
-            {props.category.category_name}
+            {props.category}
         </div>
     );
 }
 
 function RecommendSettingPopup(props){
+    const globalVar = useContext(AppContext);
     const [checkedCategory, setCheckedCategory] = useState(new Set());
+    const categoryList = ['tempo', 'danceability', 'acousticness', 'energe'];
 
     const checkedCategoryHandler = (id, isChecked) => {
         if(isChecked) {
             checkedCategory.add(id);
             setCheckedCategory(checkedCategory);
+            console.log(checkedCategory)
         }
         else if (!isChecked && checkedCategory.has(id)) {
             checkedCategory.delete(id);
             setCheckedCategory(checkedCategory);
+            console.log(checkedCategory)
         }
     }
     
     const submitRecommendSetting = () => {
-        // 선택된 카테고리가 있을때만 fetch
         if (checkedCategory.size > 0) {
-            //fetch하고 close
+            const tmpArr = [...checkedCategory]
+            globalVar.changeRecommendCategory(tmpArr)
+            setCheckedCategory(new Set());
             props.close();
         }
-
         else {
-            // alert
+            alert('카테고리를 선택해주세요.')
         }
     }
 
@@ -64,7 +66,7 @@ function RecommendSettingPopup(props){
                 </header>
                 <main>
                     <ul className='category__list__table'>
-                        {props.categorySetting && props.categorySetting.map((category, index) => (
+                        {categoryList && categoryList.map((category, index) => (
                             <CategoryLable category={category} checkedCategoryHandler={checkedCategoryHandler}/>
                         ))}
                     </ul>

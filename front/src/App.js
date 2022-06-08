@@ -14,6 +14,8 @@ function App() {
   const [ selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [ playingPlaylist, setPlayingPlaylist] = useState(null);
   const [ playingTrackList, setPlayingTrackList ] = useState(null);
+  const [ recommendCategory, setRecommendCategory ] = useState(['tempo', 'danceability', 'acousticness', 'energe']);
+
   const changeSearchRequest = (value) => {
     setSearchRequest(value);
   }
@@ -30,6 +32,10 @@ function App() {
     setSearchResponse(value)
   }
 
+  const changeRecommendCategory = (value) => {
+    setRecommendCategory(value);
+  }
+
 
   const globalVar = {
     searchRequest: searchRequest,
@@ -37,11 +43,13 @@ function App() {
     selectedPlaylist: selectedPlaylist,
     playingPlaylist: playingPlaylist,
     playingTrackList: playingTrackList,
+    recommendCategory: recommendCategory,
     changeSearchRequest,
     changeSelectedPlaylist,
     changePlayingPlaylist,
     changePlayingTrackList,
     changeSetSearchResponse,
+    changeRecommendCategory
   }
 
   useEffect(() => {
