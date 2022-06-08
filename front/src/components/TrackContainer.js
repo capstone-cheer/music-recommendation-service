@@ -17,7 +17,6 @@ function TrackContainer(props) {
         })
         globalVar.changePlayingTrackList(tmpPlayTrackList)
     }
-    console.log('추천 카테고리',globalVar.recommendCategory)
 
     const submitTrackFromItem = (value) => {
         const tmpPlayTrackList = [];

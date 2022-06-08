@@ -25,8 +25,9 @@ function Container(props){
     }
 
     useEffect(() => {
-        console.log("container / selectPL")
-        getPlaylistItems();
+        if(globalVar.selectedPlaylist !== null){
+            getPlaylistItems();
+        }
     }, [globalVar.selectedPlaylist])
 
     // 선택된 플레이리스트가 있으면 해당 플레이리스트에 대한 정보 fetch
