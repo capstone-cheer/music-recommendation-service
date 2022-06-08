@@ -45,13 +45,13 @@ function RecommendList(props) {
     }
     
     useEffect(() => {
-        if(globalVar.searchRequest === null) {
+        if(globalVar.searchRequest === null && songIdList !== null) {
             fetchRecommendByList();
         }
     },[globalVar.recommendCategory]);
 
     useEffect(() => {
-        if(globalVar.searchRequest === null){
+        if(globalVar.searchRequest === null && songIdList !== null){
             fetchRecommendByList();
         }
     },[songIdList])
@@ -63,7 +63,9 @@ function RecommendList(props) {
     }, [props.playlistItems])
 
     useEffect(() => {
-        fetchRecommendByItem();
+        if(globalVar.searchRequest !== null){
+            fetchRecommendByItem();
+        }
     }, [globalVar.recommendSource, globalVar.recommendCategory])
 
 

@@ -14,11 +14,7 @@ function Container(props){
     const globalVar = useContext(AppContext);
     
     const categories = [
-        {'id' : '1', 'name' : 'category1', 'playlists' : props.playlists},
-        {'id' : '2', 'name' : 'category2', 'playlists' : props.playlists},
-        {'id' : '3', 'name' : 'category3', 'playlists' : props.playlists},
-        {'id' : '4', 'name' : 'category4', 'playlists' : props.playlists},
-        {'id' : '5', 'name' : 'category5', 'playlists' : props.playlists},
+        {'id' : '1', 'name' : '', 'playlists' : props.playlists},
     ]
 
     const getPlaylistItems = async () => {
@@ -50,7 +46,7 @@ function Container(props){
             ):(
                 <div className="category__container">
                     {categories && categories.map((category, index) => (
-                        <div className="category__belt">
+                        <div className="category__belt" key={index}>
                             <div className="category__name">{category.name}</div>
                             <CategoryRow playlists={category.playlists} />
                             <hr />

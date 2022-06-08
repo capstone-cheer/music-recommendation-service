@@ -6,7 +6,7 @@ function CategoryRow(props) {
     return (
         <div className="playlist__frame">
                 {props.playlists && props.playlists.map((playlist, index) => (
-                    <Playbox playlist={playlist} />
+                    <Playbox playlist={playlist} key={index} />
                 ))}
         </div>
     );

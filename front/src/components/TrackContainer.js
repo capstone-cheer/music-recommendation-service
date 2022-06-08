@@ -49,7 +49,7 @@ function TrackContainer(props) {
                 </div>
                 <div className="track__list">
                     {props.playlistItems && props.playlistItems.map((track, index) => (
-                        <TrackInfo track={track} order={index+1} submitTrackFromItem={submitTrackFromItem} />
+                        <TrackInfo track={track} order={index+1} submitTrackFromItem={submitTrackFromItem} key={index} />
                     ))}
                 </div>    
             </div>
