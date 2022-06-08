@@ -13,7 +13,7 @@ const fetchSignUp = async (loginId, password) => {
         console.log('res', response);
         window.location.replace("/");
     }).catch(function (error) {
-        console.log('err', error);
+        alert('이미 존재하는 ID 입니다.')
     }).then(function (func) {
         console.log('func', func)
     }
@@ -24,8 +24,6 @@ const fetchSignUp = async (loginId, password) => {
 
 // Login > SignUp
 function SignUp(props) {
-    const navi = useNavigate();
-
     const [loginId, setLoginId] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCheck, setPasswordCheck] = useState('')
@@ -45,8 +43,7 @@ function SignUp(props) {
             await fetchSignUp(loginId, password)
         }
         else{
-            // 추후 확인 메시지
-            console.log("check password")
+            alert('비밀번호가 일치하지 않습니다.')
         }
     }
 
