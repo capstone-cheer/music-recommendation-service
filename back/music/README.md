@@ -4,7 +4,7 @@
 
 <details markdown="1">
 <summary>회원</summary>
-
+  
 <details markdown="1" style="margin-left:14px">
 <summary>회원가입</summary>
 
@@ -541,11 +541,21 @@ $ cd h2/bin
 $ ./h2.sh
 ```
 3. url 수정  
-`xxx.xxx.xxx.xxx:8082/login...` -> `localhost.8082/login...`
+`xxx.xxx.xxx.xxx:8082/login...` -> `localhost:8082/login...`
 4. .db파일 생성  
 4-1. `JDBC URL` - `jdbc:h2:~/musicapp`  
 4-2. `~/musicapp.mv/db` 파일 생성 확인  
 4-3. 이후 부터는 `JDBC URL` - `jdbc:h2:tcp://localhost/~/musicapp`로 접속
+
+### Spotify API Client
+1. 링크로 Spotify Client 생성
+   https://developer.spotify.com/dashboard/login
+2. Spotify API Key 설정 파일 추가
+```shell
+$ cd back/music/src/main/resources
+$ touch application-API-KEY.properties
+$ echo -e "spotify.client.id=${SPOTIFY-CLIENT-ID}\nspotify.client.secret=${SPOTIFY-CLIENT-SECRET}" >> 
+```
 
 ### 서버 실행
 h2 데이터베이스가 실행상태여야 합니다.  
