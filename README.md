@@ -94,11 +94,6 @@ Flask & Gensim server -  [README.md]()
 <br/>
 
 
-## 결론
-
-<br/>
-
-
 ## 참조문헌
 [1] 김찬수, “스포티파이의 고객경험 접근방식 [2부] - Push방식: 추천모델과 리워드”, 투이컨설팅,  https://www.2e.co.kr/news/articleView.html?idxno=210541. 
   
