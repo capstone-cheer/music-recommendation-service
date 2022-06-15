@@ -554,7 +554,7 @@ $ ./h2.sh
 ```shell
 $ cd back/music/src/main/resources
 $ touch application-API-KEY.properties
-$ echo -e "spotify.client.id=${SPOTIFY-CLIENT-ID}\nspotify.client.secret=${SPOTIFY-CLIENT-SECRET}" >> 
+$ echo -e "spotify.client.id=${SPOTIFY-CLIENT-ID}\nspotify.client.secret=${SPOTIFY-CLIENT-SECRET}" >> application-API-KEY.properties 
 ```
 
 ### 서버 실행
