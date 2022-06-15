@@ -48,8 +48,11 @@ CBF는 아이템에 대한 정보만 있으면 추천이 가능하기 때문에 
 
 ---
 ## 시스템 Flow Chart
-![Flow Chart 1 - 사용자의 seed 음악 기반 추천 기능](<img width="203" alt="image" src="https://user-images.githubusercontent.com/43146778/173761715-b09d42c4-c249-4a8c-94f6-7d051725505e.png">)
-![Flow Chart 2 - 플레이리스트 기반 추천 기능](<img width="180" alt="image" src="https://user-images.githubusercontent.com/43146778/173761978-3554e288-1e20-42a1-8dda-7135bc885d6f.png">)
+
+![Flow Chart 1 - 사용자의 seed 음악 기반 추천 기능](https://user-images.githubusercontent.com/43146778/173761715-b09d42c4-c249-4a8c-94f6-7d051725505e.png)   
+
+![Flow Chart 2 - 플레이리스트 기반 추천 기능](https://user-images.githubusercontent.com/43146778/173761978-3554e288-1e20-42a1-8dda-7135bc885d6f.png)
+
 
 <br/>
 
