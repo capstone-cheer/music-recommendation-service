@@ -72,7 +72,7 @@ CBF는 아이템에 대한 정보만 있으면 추천이 가능하기 때문에 
 
 ## Installation
 ### Client Manual
-React Client - [README.md]()
+React Client - [README.md](https://github.com/capstone-cheer/music-recommendation-service/blob/main/front/README.md)
 
 ### Server Manual
 Spring main server  - [README.md](https://github.com/capstone-cheer/music-recommendation-service/blob/main/back/music/README.md)  
