@@ -1,0 +1,66 @@
+.status__box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    height: 10vh;
+    width: 20vw;
+}
+
+.login__status__box {
+    color: white;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 10vh;
+    
+}
+
+.local__login__status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.local__login__info {
+    padding-left: 10px;
+}
+
+.spotify__login__status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.spotify__login__id {
+    padding-left: 10px;
+}
+
+.logout__button {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.logout__button > button {
+    color: black;
+    font-weight: bold;
+    background-color: #1db954;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0;
+    padding: 10px;
+}
+
+.spotify__login__btn {
+    color: white;
+    background-color: transparent;
+    border: 0;
+    padding-left: 10px;
+    box-shadow: 0;
+}

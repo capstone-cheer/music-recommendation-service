@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none #애플리케이션 실행시점에 내가 가진 엔티티 다 drop 후 다시 생성
+      ddl-auto: create #애플리케이션 실행시점에 내가 가진 엔티티 다 drop 후 다시 생성
       #ddl-auto: update # 바뀐 스키마에 대해서만 업데이트
     properties:
       hibernate:
