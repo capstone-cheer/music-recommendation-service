@@ -2,7 +2,8 @@
 
 
 ### 요약
-> 
+> Song2Vec 알고리즘과 CBF를 통해 사용자가 선택한 음악과 비슷한 음악을 추천해주는 서비스입니다.
+> 사용자가 선택한 추천 카테고리를 기반하여 CBF의 결과를 조정할 수도 있습니다.
 
 <br/>
 
@@ -15,8 +16,9 @@
 ---
 
 ## 연구배경
-
-
+ 기존의 음악 스트리밍 서비스 제공 업체에서 주로 사용하는 추천 방식은 **협업 필터링(Collaborative Filtering)** 이다. 협업 필터링은 컨텐츠에 대한 고객들의 선호도와 관심 표현을 바탕으로 선호도, 관심에서 비슷한 패턴을 가진 고객들을 식별해 내는 기법이다. 협업 필터링은 높은 정확성을 가지는 한편, 구현을 하기 위해서는 많은 사용자 데이터가 필요하다. 기업은 사용자 데이터를 외부에 공개하기 어려우며, 기업에 속하지 않은 개발자의 입장에서 이런 데이터를 접하는 기회는 더더욱 어렵다.  
+<br>
+협업 필터링을 사용할 수 없는 상황에서 기존 음악 스트리밍 업체와 비슷한 성능의 추천 시스템을 개발하고, 높은 사용자 경험을 제공할 수 있는 음악 스트리밍 서비스를 구현하는 것을 목표로 한다.
 
 <br/>
 
@@ -41,18 +43,29 @@ CBF는 아이템에 대한 정보만 있으면 추천이 가능하기 때문에 
 <br/>
 
 ---
-## 서비스 아키텍처
-![]()
+## 프로그램 아키텍처
+![](https://user-images.githubusercontent.com/43146778/173767106-7831a2d0-770e-44ff-ab86-7efdb84ebe42.png)
+
 
 <br/>
 
 ---
-## 시스템 Flow Chart
+## 서비스 Flow Chart
 
-![Flow Chart 1 - 사용자의 seed 음악 기반 추천 기능](https://user-images.githubusercontent.com/43146778/173761715-b09d42c4-c249-4a8c-94f6-7d051725505e.png)   
+![](https://user-images.githubusercontent.com/43146778/173764119-d6fb040f-714a-47d2-a494-2317fb4ffa3d.png)  
+*Flow Chart 1 - 사용자 서비스 이용 주 흐름도*
 
-![Flow Chart 2 - 플레이리스트 기반 추천 기능](https://user-images.githubusercontent.com/43146778/173761978-3554e288-1e20-42a1-8dda-7135bc885d6f.png)
+<br/>
 
+![](https://user-images.githubusercontent.com/43146778/173761715-b09d42c4-c249-4a8c-94f6-7d051725505e.png)  
+*Flow Chart 2 - 사용자의 seed 음악 기반 추천 기능*
+
+<br/>
+
+![](https://user-images.githubusercontent.com/43146778/173761978-3554e288-1e20-42a1-8dda-7135bc885d6f.png)  
+*Flow Chart 3 - 플레이리스트 기반 추천 기능*
+
+<br/>
 
 <br/>
 
