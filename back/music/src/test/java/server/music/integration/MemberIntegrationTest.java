@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import server.music.controller.MemberForm;
-import server.music.domain.Member;
-import server.music.service.MemberService;
+import server.music.member.controller.form.MemberForm;
+import server.music.member.domain.Member;
+import server.music.member.service.MemberService;
 
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -1,27 +1,18 @@
 package server.music.integration;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import server.music.controller.PlaylistForm;
-import server.music.domain.Member;
-import server.music.domain.constvalue.Default;
-import server.music.repository.MemberRepository;
-import server.music.service.MemberService;
-import server.music.service.PlaylistService;
+import server.music.member.domain.Member;
+import server.music.member.repository.MemberRepository;
+import server.music.member.service.MemberService;
+import server.music.playlist.service.PlaylistService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
