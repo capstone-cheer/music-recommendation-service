@@ -37,7 +37,7 @@ public class Main {
 		JSONArray jsonArray = (JSONArray)parser.parse(reader);
 
 		//jsonArray = (JSONArray)parser.parse(reader);
-		List<String>[] melonDataSets = readJsonFile(541001, 546000); // [] 폐구간
+		List<String>[] melonDataSets = readJsonFile(604001, 609000); // [] 폐구간
 		for (List<String> melonDataSet : melonDataSets) {
 			try {
 				JSONObject jsonObject = new JSONObject();
