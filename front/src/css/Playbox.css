@@ -1,0 +1,23 @@
+.playbox {
+    background-color: #101010;
+    color:gray;
+}
+
+.playbox:hover {
+    background-color: gray;
+    color: black;
+}
+
+.playbox > button {
+    display: flex;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.playbox > button > img {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}

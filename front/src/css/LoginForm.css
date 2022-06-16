@@ -1,0 +1,102 @@
+.login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    background-color: black;
+}
+
+.login__container {
+    display: flex;
+    padding: 5%;
+    flex-grow: 1;
+    flex-direction: column;
+    border: solid 1px;
+    width: 50vw;
+    max-width: 300px;
+    height: 25vh;
+    max-height: 150px;
+    border-radius: 50px;
+    background-color: #151515;
+}
+
+.input__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #2d2d2d;
+}
+
+.id__input__container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.id__input__icon {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.id__input {
+    display: flex;
+    flex-grow: 1;
+}
+
+.id__input > input {
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.password__input__container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.password__input__icon {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password__input {
+    display: flex;
+    flex-grow: 1;
+}
+
+.password__input > input {
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    color: white;
+}
+
+
+
+.input__container > button {
+    font-size: 15px;
+    line-height: 30px;
+    background-color: #cccccc;
+    font-weight: bold;
+    border: 0;
+}
+
+.input__container > button:hover {
+    background-color: #1db954;
+}
+
+.signup__button {
+    padding: 10px;
+}

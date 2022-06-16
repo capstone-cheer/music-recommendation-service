@@ -1,0 +1,93 @@
+.recommend__track__info {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 30vw;
+    border-bottom: 2px solid #1b1b1b;
+}
+
+.recommend__track__info:hover{
+    background-color: gray;
+    color: black;
+}
+
+.recommend__track__order {
+    width: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.recommend__track__info__play__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.recommend__track__info__play__button > button {
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.recommend__track__info__play__circle {
+    margin: 0;
+}
+
+.recommend__track__cover {
+    height: 50px;
+    width: 50px;
+}
+
+.recommend__track__detail {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 40px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.recommend__album__title__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.recommend__title__info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 17vw;
+}
+
+.recommend__album__info {
+    color: #999999;
+    font-size: 12px;
+}
+
+.recommend__album__info:hover {
+    color: black;
+
+}
+
+.recommend__artist__box {
+    flex-shrink: 0;
+    padding: 0px;
+    overflow: hidden;
+    font-size: 14px;
+    max-width: 13vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

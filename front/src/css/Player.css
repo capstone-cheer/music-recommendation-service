@@ -1,0 +1,29 @@
+.player {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 15vh;
+    background-color: #151515;
+}
+
+.spotify__player__sdk {
+    display: flex;
+    width: 100vw;
+}
+
+.player__need__login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 120px;
+}
+
+.player__spotify__login__btn {
+    color: black;
+    height: 60px;
+    background-color: #1db954;
+    font-weight: bold;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 2rem;
+}

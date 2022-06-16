@@ -36,4 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/java/server/music/spotify/api
+#API KEY
+src/main/resources/application-API-KEY.properties

@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import server.music.service.MemberService;
+import server.music.member.controller.form.MemberForm;
+import server.music.member.controller.MemberController;
+import server.music.member.service.MemberService;
 
 @WebMvcTest(MemberController.class)
 class MemberControllerTest {
