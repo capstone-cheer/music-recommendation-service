@@ -79,16 +79,12 @@ Flask & Gensim server - [README.md](https://github.com/capstone-cheer/music-reco
 
 <br/>
 
-## 실행화면
+## 실행 화면
 
-### 로그인 화면
-
-### 음악 검색
-
-### 음악 하나에 대한 추천 리스트
-
-### 플레이리스트에 대한 추천 리스트
-
+### 음악을 검색하고, 재생 시 관련된 음악을 추천
+![](https://user-images.githubusercontent.com/43146778/174069046-1834a1b0-0dac-483f-bc29-0696b8a9d35c.png)
+### 직접 만든 플레이리스트와 관련된 음악을 추천
+![](https://user-images.githubusercontent.com/43146778/174069076-9adc5b98-272e-48a5-ae56-009bb88bd803.png)
 <br/>
 
 ## 참조문헌
