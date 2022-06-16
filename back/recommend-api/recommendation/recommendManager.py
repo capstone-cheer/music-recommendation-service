@@ -20,7 +20,6 @@ class Recommend:
             self.gnr_scoring_model = json.load(file)
 
     def get_by_playlist(self, seed, category, genre):
-        print("playlist based Song2Vec api start")
         get_songs = []
         for song_id in seed:
             try:
@@ -41,20 +40,23 @@ class Recommend:
         for song in get_songs:
             if len(song) > 6: # Spotify ID인 경우에만(매핑이 완료된 음악인 경우에만) result에 append
                 result.append(song)
-            if len(result) == 100:
+            if len(result) == 30:
                 break
         # spotify id로만 이루어진 추천 결과를 토대로 category 기반 CBF 적용
-        analysis = self.spotifyManager.get_audio_analysis_playlist(seed, result, category)
-        result = self.content_based_recommendation(result, category, analysis)
-        return result
+        s2v_result = result[:len(result)//2]
+        cbf_result = result[len(result)//2:]
+        analysis = self.spotifyManager.get_audio_analysis_playlist(seed, cbf_result, category)
+        cbf_result = self.content_based_recommendation(cbf_result, category, analysis)
+
+        result = random.sample(s2v_result, len(s2v_result)//2) + random.sample(cbf_result, len(cbf_result)//2)
+        return result[0:10]
 
     def get_by_single_song(self, seed, category, genre):
-        print("single song based Song2Vec api start")
         get_songs = []
         try:
             # topn_songs : List<tuple>
             # Song2Vec 모델의 추천 결과를 topn_songs에 저장
-            topn_songs = self.s2v_model.similar_by_word(str(seed), topn=50)
+            topn_songs = self.s2v_model.similar_by_word(str(seed), topn=30)
             for song in topn_songs:
                 # get_songs에 추천 결과의 spotify id를 저장
                 get_songs.append(song[0])
@@ -66,9 +68,14 @@ class Recommend:
         for song_id in get_songs:
             if len(song_id) > 6: # Spotify ID인 경우에만(매핑이 완료된 음악인 경우에만) result에 append
                 result.append(song_id)
-        # spotify id로만 이루어진 추천 결과를 토대로 category 기반 CBF 적용
-        analysis = self.spotifyManager.get_audio_analysis_single_song(seed, result, category)
-        result = self.content_based_recommendation(result, category, analysis)
+
+        # s2v의 결과의 절반, s2v+CBF의 결과의 절반을 랜덤추출하여 최종 반환
+        s2v_result = result[:len(result)//2]
+        cbf_result = result[len(result)//2:]
+        analysis = self.spotifyManager.get_audio_analysis_single_song(seed, cbf_result, category)
+        cbf_result = self.content_based_recommendation(cbf_result, category, analysis)
+
+        result = random.sample(s2v_result, len(s2v_result)//2) + random.sample(cbf_result, len(cbf_result)//2)
         return result
 
     def get_gnr_score(self, genre):

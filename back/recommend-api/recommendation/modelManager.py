@@ -106,7 +106,7 @@ class GenreScoring:
         #     for tup in tup_list:
         #         result.append(tup[0])
         # 장르 tag별 song list 저장
-        with open('models/genre_tags_mapping_table26.json', 'w', encoding='utf-8') as file:
+        with open('datasets/genre_tags_mapping_table26.json', 'w', encoding='utf-8') as file:
             file.write(json.dumps(genre_tags, ensure_ascii=False))
 
     def get_genre_songs(self):
@@ -152,8 +152,3 @@ class GenreScoring:
         print("genre_tags finished")
         self.get_genre_songs()
         print("genre_songs finished")
-
-# rec = Song2Vec('./datasets')
-# rec.run()
-# model = GenreScoring()
-# model.run()
