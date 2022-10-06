@@ -1,15 +1,15 @@
 import spotipy
-from spotify.spotifyApi import ApiKey
+from recommendation.spotify.spotifyApi import ApiKey
 from spotipy.oauth2 import SpotifyOAuth
 
 
 class SpotifyManager:
     def __init__(self):
         self.apiKeys = ApiKey.ApiKeys()
-        self.spotifyApi =  spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=self.apiKeys.CLIENT_ID,
-                                               client_secret=self.apiKeys.CLIENT_SECRET,
-                                               redirect_uri="http://localhost:3000/callback",
-                                               scope="user-library-read"))
+        self.spotifyApi = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=self.apiKeys.CLIENT_ID,
+                                                                    client_secret=self.apiKeys.CLIENT_SECRET,
+                                                                    redirect_uri="http://localhost:3000/callback",
+                                                                    scope="user-library-read"))
 
     def get_audio_analysis_single_song(self, seed_id, song_id_list, category):
         song_id_list.append(seed_id)

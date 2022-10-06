@@ -15,4 +15,3 @@ print(train[0]['songs'])
 
 with open(os.path.join(FILE_PATH, 'train_str.json'), 'w', encoding="utf-8") as outfile:
     json.dump(train, outfile, ensure_ascii=False)
-

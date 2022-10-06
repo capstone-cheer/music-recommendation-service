@@ -1,12 +1,12 @@
 .idea
-recommendation/datasets/
-recommendation/models/
+flask/recommendation/datasets/
+flask/recommendation/models/
 *.pyc
-recommendation/__pycache__/
+flask/recommendation/__pycache__/
 
 myvenv
 venv
-spotify/spotifyApi
+flask/recommendation/spotify/spotifyApi
 
 # spotipy 라이브러리 사용시 생성되는 access token
 .cache

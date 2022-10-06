@@ -13,7 +13,8 @@ def get_recommend_by_playlist():
     print("[request: /recommend/playlist]")
     print(data['song_id_list'])
     print(data['category'])
-    result = recommend.get_by_playlist(data['song_id_list'], data['category'], test_genre)
+    result = recommend.get_by_playlist(
+        data['song_id_list'], data['category'], test_genre)
     result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -31,7 +32,8 @@ def get_recommend_by_song():
     print("[request: /recommend/song]")
     print(data['song_id'])
     print(data['category'])
-    result = recommend.get_by_single_song(data['song_id'], data['category'], test_genre)
+    result = recommend.get_by_single_song(
+        data['song_id'], data['category'], test_genre)
     result = {'song_id_list': result}
     response = app.response_class(
         response=json.dumps(result),
@@ -43,5 +45,5 @@ def get_recommend_by_song():
 
 
 if __name__ == "__main__":
-    recommend = recommendManager.Recommend('../recommendation')
+    recommend = recommendManager.Recommend('flask/recommendation')
     app.run()
